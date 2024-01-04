@@ -6,16 +6,16 @@ import woman from '../assets/self-image.jpg';
 const Services = () => {
   const renderCard = () => {
     const cardData = [
-     {id:1,title:'Card1',image:'../assets/self-image.jpg'},
-     {id:2,title:'Card1',image:'../assets/self-image.jpg'},
-     {id:3,title:'Card1',image:'../assets/self-image.jpg'},
-     {id:4,title:'Card1',image:'../assets/self-image.jpg'}
+     {id:1,title:'Card1',image:'../assets/self-image.jpg',linkTo: '/card1'},
+     {id:2,title:'Card1',image:'../assets/self-image.jpg',linkTo: '/card2'},
+     {id:3,title:'Card1',image:'../assets/self-image.jpg',linkTo: '/card3'},
+     {id:4,title:'Card1',image:'../assets/self-image.jpg',linkTo: '/card4'}
     ];
 
     
     return cardData.map((card) => (
       <div key={card.id} className='w-full flex items-center justify-center gap-4 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-        <Link to=''>
+        <Link  key={card.id} to={card.linkTo}>
           <img className='p-8 rounded-t-lg' src={woman} alt={card.title} />
         </Link>
       </div>
