@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import './index.css'
+import Services from "./components/Services";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -28,7 +29,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:<Hero />
+        element:[<Hero />,<Services/>]
       },
       {
         path:'/login',

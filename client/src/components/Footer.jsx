@@ -4,16 +4,16 @@ import footeritems from "../constants/footeritems.json"
 
 const Footer = () => {
   return (
-<footer class="bg-gradient-to-r from-gray-100 via-[#bce1ff] to-gray-100">
+<footer class="bg-gradient-to-r from-blue-100 via-[#bce1ff] to-blue-100">
   <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div>
       <img src={image} class="mr-5 md:h-48 sm:h-9" alt="logo" />
         <h1 class='pt-2'>MindHarbor</h1>
-        <p class="max-w-xs mt-4 text-sm text-gray-600">
+        <p class="max-w-xs mt-4 text-sm text-blue-600">
           The one stop solution for all your mental health.
         </p>
-        <div class="flex mt-8 space-x-6 text-gray-600">
+        <div class="flex mt-8 space-x-6 text-blue-600">
 
           <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
             <span class="sr-only"> Facebook </span>
@@ -49,7 +49,7 @@ const Footer = () => {
                 <p class="font-medium">
                   {item.head}
                 </p>
-                  <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  <nav class="flex flex-col mt-4 space-y-2 text-sm text-blue-500">
                   {
                   item.info.map((x)=>{
                     return(
@@ -64,7 +64,7 @@ const Footer = () => {
         }
       </div>
     </div>
-    <p class="mt-8 text-xs text-gray-800">
+    <p class="mt-8 text-xs text-blue-800">
       © MindHarbor
     </p>
   </div>
