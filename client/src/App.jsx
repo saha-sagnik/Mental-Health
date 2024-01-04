@@ -15,6 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const AppLayout = ()=>{
   return (
     <>
+    <Help/>
       <Navbar />
       <Outlet />
       <Footer />
