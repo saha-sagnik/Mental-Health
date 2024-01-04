@@ -1,0 +1,18 @@
+[
+    {
+        "head": "Company",
+        "info": ["About Us", "Our Team", "Our Journey", "Join Us"]
+    },
+    {
+        "head": "Services",
+        "info": ["Track Mood", "Professional Support", "Community Forum", "Mindfulness Resources","Wellness Insights"]
+    },
+    {
+        "head": "Helpful Links",
+        "info": ["Contact", "FAQs", "Live Chat"]
+    },
+    {
+        "head": "Legal",
+        "info": ["Privacy Policy","Terms & Conditions"]
+    }
+]
