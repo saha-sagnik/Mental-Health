@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require("cors");
+const connectDB = require('./database/connectDB');
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cors());
@@ -16,31 +18,7 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-async function connectToMongoDB() {
-    try {
-      await mongoose.connect('mongodb+srv://sbmunnu:munnu@mongo.mzaad3h.mongodb.net/wallmart?retryWrites=true&w=majority', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      console.log('Connected to MongoDB');
-    } catch (error) {
-      console.error('Error connecting to MongoDB:', error);
-    }
-  }
-connectToMongoDB()
-Schema = mongoose.Schema 
-const userSchema = new Schema({
-    name:{
-        type:String
-    },
-    password:{
-        type:String
-    },
-    email:{
-        type:String
-    }
-})
-const User = mongoose.model('User', userSchema)
+connectDB();
 
 app.get('/',cors(),(req,res)=>{
 })
