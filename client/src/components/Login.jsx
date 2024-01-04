@@ -32,9 +32,10 @@ const Login = () => {
  const handleUser = async (user)=>{
     const data = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`);
     const json = await data.json();
-    await axios.post("http://localhost:5001/googlelogin",{
-      josn
+    const response = await axios.post("http://localhost:5001/googlelogin",{
+      json
     });
+    console.log(response);
  }
 
   const navigate = useNavigate()
