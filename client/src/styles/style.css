@@ -1,0 +1,32 @@
+#card-1{
+    background-color: #e1f0ee;
+    transition: all 0.3s;
+}
+
+#card-1:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(179, 178, 178, 0.575), 0 10px 24px rgba(238, 238, 239, 0.694), 0 15px 40px rgba(0, 0, 0, 0.1), 0 24px 80px rgba(0, 0, 0, 0.1);
+}
+
+#card-2{
+    background-color: #f2fbcc;
+}
+
+#card-2:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(179, 178, 178, 0.575), 0 10px 24px rgba(238, 238, 239, 0.694), 0 15px 40px rgba(0, 0, 0, 0.1), 0 24px 80px rgba(0, 0, 0, 0.1);
+}
+
+#card-3{
+    background-color: #e1e5f0;
+}
+
+#card-3:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(236, 107, 107, 0.575), 0 10px 24px rgba(238, 238, 239, 0.694), 0 15px 40px rgba(0, 0, 0, 0.1), 0 24px 80px rgba(0, 0, 0, 0.1);
+}
+
+#card-4{
+    background-color: #f1dddd;
+}
+
+#card-4:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(179, 178, 178, 0.575), 0 10px 24px rgba(238, 238, 239, 0.694), 0 15px 40px rgba(0, 0, 0, 0.1), 0 24px 80px rgba(0, 0, 0, 0.1);
+}

@@ -1,17 +1,43 @@
-import React, { useState } from 'react'
-import { NavLink, Navigate, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import google from '../assets/google.png'
-import woman from '../assets/login-pic.jpg'
-import axios from "axios";
-import 'flowbite'
-import logo from '../assets/mindharbor-logo-removebg-preview1.png'
-
+import { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import google from '../assets/google.png';
+import woman from '../assets/login-pic.jpg';
+import axios from "axios"; // Keep this import statement if you need it
+import 'flowbite';
+import logo from '../assets/mindharbor-logo-removebg-preview1.png';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
   const [mail, setMail] = useState();
   const [pass, setPass] = useState();
   const [showalert, setShowAlert] = useState(false);
+  const [ user, setUser ] = useState([]);
+  const [ profile, setProfile ] = useState([]);
+
+  const login = useGoogleLogin({
+      onSuccess: (codeResponse) => setUser(codeResponse),
+      onError: (error) => console.log('Login Failed:', error)
+  });
+
+  useEffect(
+    () => {
+        if (user) {
+          handleUser(user);
+        }
+    },
+    [ user ]
+);
+
+ const handleUser = async (user)=>{
+    const data = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`);
+    const json = await data.json();
+    const response = await axios.post("http://localhost:5001/googlelogin",{
+      json
+    });
+    console.log(response);
+ }
+
   const navigate = useNavigate()
 
   async function submit(e) {
@@ -22,7 +48,6 @@ const Login = () => {
         pass
       })
         .then(res => {
-          console.log(res);
           if (res.data == 'fail') {
             setShowAlert(true);
             setTimeout(() => {
@@ -41,13 +66,13 @@ const Login = () => {
     <>
       {
         showalert ?
-          <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+          <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg  dark:bg-gray-800 dark:text-blue-400 bg-red-400" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
             <span class="sr-only">Info</span>
             <div>
-              <span class="font-medium">Login Failed!</span> Change input cblueentials and try submitting again.
+              <span class="font-medium">Login Failed!</span> Change input credentials and try submitting again.
             </div>
           </div>
           :
@@ -100,10 +125,14 @@ const Login = () => {
                   or
                 </p>
               </div>
-              <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
-                <img className='pl-10 w-16' src={google} />
-                <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
-              </div>
+                <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'
+                  onClick={()=>{
+                    login();
+                  }}
+                >
+                  <img className='pl-10 w-16' src={google} />
+                  <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
+                </div>
 
               <div class="flex items-center justify-between">
                 <div class="flex items-start">
@@ -123,9 +152,6 @@ const Login = () => {
               <p class="text-sm font-light text-gray-500 dark:text-gray-400"></p>
             </div>
           </div>
-        </div>
-        <div className='md:p-14 pb-0'>
-          <img src={woman} alt="" />
         </div>
       </section>
     </>
