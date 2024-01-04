@@ -1,34 +1,45 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from './components/Login';
 import Help from "./components/Help";
 import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import './index.css'
 
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-      </Routes>
-    </Router>
-  );
-}
-
-function HomePage() {
+const AppLayout = ()=>{
   return (
     <>
-      <Help /> 
       <Navbar />
-      <Hero/>
-      <Footer/>
+      <Outlet />
+      <Footer />
     </>
-  );
+  )
 }
 
-export default App;
+const appRouter = createBrowserRouter([
+  {
+    path:'/',
+    element:<AppLayout/>,
+    children:[
+      {
+        path:'/',
+        element:<Hero />
+      },
+      {
+        path:'/login',
+        element:<Login />
+      },
+      {
+        path:'/signup',
+        element:<SignUp />
+      }
+    ]
+  }
+])
+
+root.render(<RouterProvider router={appRouter} />) ;
