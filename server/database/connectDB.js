@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 async function connectToMongoDB() {
     try {
       await mongoose.connect('mongodb+srv://sbmunnu:munnu@mongo.mzaad3h.mongodb.net/wallmart?retryWrites=true&w=majority', {

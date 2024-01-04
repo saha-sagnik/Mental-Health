@@ -70,6 +70,6 @@ app.post('/signup',async (req,res)=>{
     });
 })
 
-app.listen(5001,()=>{
+app.listen(8001,()=>{
     console.log("running at 5001");
 })
