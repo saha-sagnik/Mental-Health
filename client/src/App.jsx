@@ -7,6 +7,7 @@ import Help from "./components/Help";
 import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import WhyChooseUs from "./components/WhyChooseUs";
 import './index.css'
 import Services from "./components/Services";
 
@@ -17,6 +18,7 @@ const AppLayout = ()=>{
     <>
       <Navbar />
       <Outlet />
+      <WhyChooseUs />
       <Footer />
     </>
   )
