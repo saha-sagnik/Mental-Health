@@ -24,7 +24,8 @@ function HomePage() {
     <>
       <Help />
       <Navbar />
-      
+      < Hero />
+      <Footer />
     </>
   );
 }
