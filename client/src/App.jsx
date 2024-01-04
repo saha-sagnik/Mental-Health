@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Login from './components/Login';
 import Help from "./components/Help";
 import SignUp from "./components/SignUp";
+import Hero from "./components/Hero";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function HomePage() {
     <>
       <Help />
       <Navbar />
+      <Hero/>
     </>
   );
 }
