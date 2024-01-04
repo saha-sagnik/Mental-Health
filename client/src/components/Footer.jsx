@@ -1,5 +1,6 @@
 import React from 'react'
 import image from '../assets/mindharbor-logo-removebg-preview1.png'
+import footeritems from "../constants/footeritems.json"
 
 const Footer = () => {
   return (
@@ -13,6 +14,7 @@ const Footer = () => {
           The one stop solution for all your mental health.
         </p>
         <div class="flex mt-8 space-x-6 text-gray-600">
+
           <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
             <span class="sr-only"> Facebook </span>
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -40,49 +42,26 @@ const Footer = () => {
         </div>
       </div>
       <div class="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
-          <p class="font-medium">
-            Company
-          </p>
-          <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a class="hover:opacity-75" href="#">About Us</a>
-            <a class="hover:opacity-75" href="#">Our Team</a>
-            <a class="hover:opacity-75" href="#">Our Journey</a>
-            <a class="hover:opacity-75" href="#">Join Us</a>
-          </nav>
-
-        </div>
-        <div>
-          <p class="font-medium">
-            Services
-          </p>
-          <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a class="hover:opacity-75" href="#">Track Mood</a>
-            <a class="hover:opacity-75" href="#">Professional Support</a>
-            <a class="hover:opacity-75" href="#">Community Forum</a>
-            <a class="hover:opacity-75" href="#">Mindfulness Resources</a>
-            <a class="hover:opacity-75" href="#">Wellness Insights</a>
-          </nav>
-        </div>
-        <div>
-          <p class="font-medium">
-            Helpful Links
-          </p>
-          <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a class="hover:opacity-75" href> Contact </a>
-            <a class="hover:opacity-75" href> FAQs </a>
-            <a class="hover:opacity-75" href> Live Chat </a>
-          </nav>
-        </div>
-        <div>
-          <p class="font-medium">
-            Legal
-          </p>
-          <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-            <a class="hover:opacity-75" href> Privacy Policy </a>
-            <a class="hover:opacity-75" href> Terms &amp; Conditions </a>
-          </nav>
-        </div>
+        {
+          footeritems.map((item)=>{
+            return (
+              <div>
+                <p class="font-medium">
+                  {item.head}
+                </p>
+                  <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
+                  {
+                  item.info.map((x)=>{
+                    return(
+                      <a class="hover:opacity-75" href="#">{x}</a>
+                    )
+                  })
+                  }
+                  </nav>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
     <p class="mt-8 text-xs text-gray-800">

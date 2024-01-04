@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import google from '../assets/google.png'
 import Navbar from './Navbar'
+import logo from '../assets/mindharbor-logo-removebg-preview1.png'
 
 
 const SignUp = () => {
@@ -12,9 +13,12 @@ const SignUp = () => {
     <div className='flex flex-col items-center justify-center px-8 py-8 mx-auto md:h-screen lg:py-0'>
       <div className='w-full bg-yellow-100 border border-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
         <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
-          <Link path='/' className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white '>
-            Pet🐶Shop
+          <div className='flex justify-center items-center'>
+          <img className='h-10 m-3' src={logo} alt="" />
+          <Link path='/' className='flex items-center text-2xl font-semibold text-gray-900 dark:text-white '>
+            Mindharbor
           </Link>
+          </div>
           <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white '>
             Create your account
           </h1>
