@@ -9,6 +9,7 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css'
+import Services from "./components/Services";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -16,6 +17,7 @@ const AppLayout = ()=>{
   return (
     <>
     <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
+      <Help/>
       <Navbar />
       <Outlet />
       <Footer />
@@ -31,7 +33,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:<Hero />
+        element:[<Hero />,<Services/>]
       },
       {
         path:'/login',
