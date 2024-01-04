@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import google from '../assets/google.png'
-import Navbar from './Navbar'
 import logo from '../assets/mindharbor-logo-removebg-preview1.png'
 
 
 const SignUp = () => {
   return (
     <>
-    <Navbar/>
+   
     <section className='bg-blue-50 dark:bg-gray-900 flex flex-wrap h-screen'>
     <div className='flex flex-col items-center justify-center px-8 py-8 mx-auto md:h-screen lg:py-0'>
       <div className='w-full bg-[#B9E0FF] border border-gray-200 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0'>
