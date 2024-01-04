@@ -47,7 +47,7 @@ const appRouter = createBrowserRouter([
         element:<SignUp />
       },
       {
-        path:'/card1',
+        path:'/card/:id',
         element:<Card/>
       }
     ]

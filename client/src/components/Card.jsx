@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { QuizData } from '../data/data.js'
 import QuizResult from './QuizResult.jsx';
+import {useParams} from 'react-router-dom'
+
 
 function Quiz() {
+    const {id} = useParams();
+    console.log(id);
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
     const [clickedOption,setClickedOption]=useState(0);
@@ -38,11 +42,11 @@ function Quiz() {
             <>
                 <div className="border-box w-[400] min-h-400 bg-white rounded-lg shadow p-10 relative">
                     <div className="question mb-8">
-                     
-                        <span className="text-xl justify-center font-bold">{QuizData[currentQuestion].question}</span>
+                     {console.log(QuizData.card1)}
+                        {/* <span className="text-xl justify-center font-bold">{QuizData[currentQuestion].question}</span> */}
                     </div>
-                    <div className="flex flex-col w-full p-5">
-                        {QuizData[currentQuestion].options.map((option, i) => (
+                    {/* <div className="flex flex-col w-full p-5">
+                        {QuizData.card1[currentQuestion].options.map((option, i) => (
                             <button
                                 key={i}
                                 className={`option-btn box-shadow hover:bg-blue-300 mb-2 p-2 rounded-md transition-all ${
@@ -53,7 +57,7 @@ function Quiz() {
                                 {option}
                             </button>
                         ))}
-                    </div>
+                    </div> */}
                     <input
                         type="button"
                         value="Next"
