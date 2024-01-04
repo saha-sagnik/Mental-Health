@@ -7,11 +7,12 @@ import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 
+
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
