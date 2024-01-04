@@ -22,10 +22,10 @@ function App() {
 function HomePage() {
   return (
     <>
-      <Help />
+      <Help /> 
       <Navbar />
-      < Hero />
-      <Footer />
+      <Hero/>
+      <Footer/>
     </>
   );
 }
