@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom'
 import google from '../assets/google.png'
 import woman from '../assets/login-pic.jpg'
 import 'flowbite'
+import Navbar from './Navbar'
 
 
 const Login = () => {
+
   return (
+    <>
+    <Navbar/>
     <section className='bg-gray-50 dark:bg-gray-900 flex flex-wrap'>
       <div className='flex flex-col items-center justify-center px-8 py-8 mx-auto md:h-screen lg:py-0'>
         <div className='w-full bg-yellow-100 rounded-lg border border-gray-300 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
@@ -63,6 +67,7 @@ const Login = () => {
         <img src={woman} alt="" />
       </div>
     </section>
+    </>
   )
 }
 
