@@ -4,7 +4,7 @@ import InfoSlice from "./InfoSlice";
 const Store = configureStore(
     {
         reducer:{
-            cart:InfoSlice
+            info:InfoSlice
         }
     }
 )

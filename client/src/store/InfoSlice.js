@@ -8,7 +8,7 @@ const infoSlice = createSlice({
     },
     reducers: {
         addItem: (state,action)=>{
-            state.info = (action.payload);
+            state.info.push(action.payload);
         },
         cleatCart:(state,action)=>{
             state.info = [];
@@ -16,6 +16,6 @@ const infoSlice = createSlice({
     }
 });
 
-export const {addItem,cleatCart} = cartSlice.actions;
+export const {addItem,cleatCart} = infoSlice.actions;
 
 export default infoSlice.reducer;

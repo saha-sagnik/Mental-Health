@@ -12,12 +12,15 @@ import './index.css'
 import Services from "./components/Services";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Card from "./components/Card";
+import Store from '../src/store/Store'
+import { Provider } from 'react-redux';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const AppLayout = ()=>{
   return (
-    <>
+    <Provider store={Store}>
     <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
       <Help/>
       <Navbar />
@@ -25,7 +28,7 @@ const AppLayout = ()=>{
       <WhyChooseUs />
       <Footer />
     </GoogleOAuthProvider>
-    </>
+    </Provider>
   )
 }
 

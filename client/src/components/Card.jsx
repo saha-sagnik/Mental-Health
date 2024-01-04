@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { QuizData } from '../constants/data.js'
 import QuizResult from './QuizResult.jsx';
-import {useParams} from 'react-router-dom'
-
+import {useParams} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/InfoSlice.js';
 
 function Quiz() {
     const {id} = useParams();
@@ -10,11 +11,15 @@ function Quiz() {
     const [currentQuestion,setCurrentQuestion]=useState(0);
     const [score,setScore] = useState(0);
     const [clickedOption,setClickedOption]=useState(0);
+    const [items,setItems] = useState([]);
     const [showResult,setShowResult]=useState(false);
-    
+    const Dispatch = useDispatch();
+    const handleAdd = ()=>{
+        Dispatch(addItem({i:items}))  
+    }
     const changeQuestion = ()=>{
         updateScore();
-        if(currentQuestion< QuizData.length-1){
+        if(currentQuestion< QuizData[cardId].length-1){
             setCurrentQuestion(currentQuestion+1);
             setClickedOption(0);
         }else{
@@ -22,7 +27,7 @@ function Quiz() {
         }
     }
     const updateScore=()=>{
-        if(clickedOption===QuizData[currentQuestion].answer){
+        if(clickedOption===QuizData[cardId][currentQuestion].answer){
             setScore(score+1);
         }
     }
@@ -51,7 +56,11 @@ function Quiz() {
                                 className={`option-btn box-shadow hover:bg-blue-300 mb-2 p-2 rounded-md transition-all ${
                                     clickedOption === i + 1 ? 'bg-blue-600 text-white' : 'bg-white'
                                 }`}
-                                onClick={() => setClickedOption(i + 1)}
+                                onClick={() => {
+                                    setClickedOption(i + 1)
+                                    setItems(...items,option);
+                                }
+                                }
                             >
                                 {option}
                             </button>
@@ -61,7 +70,10 @@ function Quiz() {
                         type="button"
                         value="Next"
                         className="absolute cursor-pointer bottom-5 right-5 px-5 py-2 bg-blue-600 text-white rounded-md shadow-md font-bold transition-all hover:bg-blue-700"
-                        onClick={changeQuestion}
+                        onClick={()=>{
+                            changeQuestion()
+                            handleAdd();
+                        }}
                     />
                 </div>
             </>
