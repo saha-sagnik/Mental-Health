@@ -11,7 +11,7 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import './index.css'
 import Services from "./components/Services";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
+import Card from "./components/Card";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -45,6 +45,10 @@ const appRouter = createBrowserRouter([
       {
         path:'/signup',
         element:<SignUp />
+      },
+      {
+        path:'/card/:id',
+        element:<Card/>
       }
     ]
   }
