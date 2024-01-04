@@ -7,6 +7,7 @@ import Help from "./components/Help";
 import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,9 +15,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const AppLayout = ()=>{
   return (
     <>
+    <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
       <Navbar />
       <Outlet />
       <Footer />
+    </GoogleOAuthProvider>
     </>
   )
 }
