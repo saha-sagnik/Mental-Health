@@ -26,11 +26,10 @@ function Quiz() {
 
   useEffect(() => {
     const storedInfo = JSON.parse(localStorage.getItem('info'));
-    setItems(storedInfo || []);
   }, []);
 
   const handleAdd = async () => {
-    dispatch(addItem({ques:QuizData[cardId][currentQuestion].question, number: currentQuestion, data: [items] }));
+    dispatch(addItem({ques:QuizData[cardId][currentQuestion].question, number: currentQuestion, data: items }));
   };
 
   const changeQuestion = () => {
@@ -49,18 +48,23 @@ function Quiz() {
     }
   };
 
-  const resetAll = () => {
-    setShowResult(false);
-    setCurrentQuestion(0);
-    setClickedOption(0);
-    setScore(0);
-  };
+  const navigateToShow = ()=>{
+    setTimeout(()=>{
+        navigate('/show');
+    },2000)
+  }
+
 
   return (
     <div className="bg-blue-200">
       <div className="flex py-8 items-center justify-center">
         {showResult ? (
-          <QuizResult score={score} totalScore={QuizData.length} tryAgain={resetAll} />
+          <>
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">Success alert!</span> Your Responses have been saved.
+                {navigateToShow()}
+            </div>
+          </>
         ) : (
           <>
             <div className="border-box w-[400] min-h-400 bg-white rounded-lg shadow p-10 relative">
@@ -78,7 +82,7 @@ function Quiz() {
                     }`}
                     onClick={() => {
                       setClickedOption(i + 1);
-                      setItems([...items, option]);
+                      setItems(option);
                     }}
                   >
                     {option}
@@ -92,7 +96,7 @@ function Quiz() {
                 onClick={async () => {
                   changeQuestion();
                   handleAdd(currentQuestion);
-                  setItems([]);
+                  setItems();
                 }}
               />
             </div>

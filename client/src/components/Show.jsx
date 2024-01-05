@@ -3,49 +3,47 @@ import { useSelector } from "react-redux";
 import Store from "../store/Store";
 import axios from "axios";
 
-const Show = ()=>{
-    const info = useSelector(Store=>Store.info.info) ;
-    useEffect(()=>{
+const Show = () => {
+    const info = useSelector(Store => Store.info.info);
+    useEffect(() => {
         // console.log(info)
-    },[]);
+    }, []);
 
-    async function submit(){
-        try{
-            await axios.post("http://localhost:5001/info",{
+    async function submit() {
+        try {
+            await axios.post("http://localhost:5001/info", {
                 info
             })
-            .then(res=>{
-                // console.log(res)
-            })
+                .then(res => {
+                    // console.log(res)
+                })
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
     submit();
-    return(
+    return (
         <>
-          
-        <h1 className="text-4xl flex justify-center bg-red-400 p-4 font-semibold font-sans" >Your Responses🤲</h1>
+
+            <h1 className="text-4xl flex justify-center p-4 font-semibold font-sans" >Your Responses🤲</h1>
             {
-                
-                info.map((x)=>{
-                    return(
-                        <div className="bg-black flex-col items-center justify-center ">
-                        <div className="flex flex-row gap-4 bg-slate-400 w-[50vw] justify-center">
-                            <h1 className="bg-yellow-500 text-pretty text-lg">{x.ques}</h1>
-                            
-                            {x?.data.map((ans)=>{
-                                return (
-                                    <h1 className="bg-red-500">{ans}</h1>
-                                )
-                            })}
-                            </div>
+
+                info.map((x) => {
+                    return (
+                    <div className="grid grid-cols-2 gap-4 p-4">
+                        <div className="bg-slate-400 rounded-md p-4">
+                            <h1>{x.ques}</h1>
                         </div>
+                        <div className="bg-blue-200 rounded-md p-4">
+                            <h1>{x.data}</h1>
+                        </div>
+                    </div>
+
                     )
                 })
             }
-              
+
         </>
     )
 }

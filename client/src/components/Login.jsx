@@ -1,71 +1,76 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import google from '../assets/google.png';
-import woman from '../assets/login-pic.jpg';
-import axios from "axios"; // Keep this import statement if you need it
+import axios from 'axios';
 import 'flowbite';
 import logo from '../assets/mindharbor-logo-removebg-preview1.png';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import google from '../assets/google.png';
+import woman from '../assets/login-pic.jpg';
+import { useGoogleLogin } from '@react-oauth/google';
 
+
+// Login.jsx
 const Login = () => {
-  const [mail, setMail] = useState();
-  const [pass, setPass] = useState();
-  const [showalert, setShowAlert] = useState(false);
-  const [ user, setUser ] = useState([]);
-  const [ profile, setProfile ] = useState([]);
+  const [mail, setMail] = useState('');
+  const [pass, setPass] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
-  const login = useGoogleLogin({
-      onSuccess: (codeResponse) => setUser(codeResponse),
-      onError: (error) => console.log('Login Failed:', error)
-  });
+  // Define the function to check authentication status
+  const checkAuthStatus = async () => {
+    try {
+      const response = await axios.get('http://localhost:5001/user');
+      if (response.data.user) {
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      console.error('Error checking authentication status:', error);
+    }
+  };
 
-  useEffect(
-    () => {
-        if (user) {
-          handleUser(user);
-        }
-    },
-    [ user ]
-);
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
- const handleUser = async (user)=>{
-    const data = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`);
-    const json = await data.json();
-    const response = await axios.post("http://localhost:5001/googlelogin",{
-      json
-    });
-    console.log(response);
- }
-
-  const navigate = useNavigate()
-
-  async function submit(e) {
+  // Define the function to handle form submission
+  const submit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5001/", {
+      const response = await axios.post('http://localhost:5001/', {
         mail,
-        pass
-      })
-        .then(res => {
-          if (res.data == 'fail') {
-            setShowAlert(true);
-            setTimeout(() => {
-              setShowAlert(false);
-            }, 4000);
-          }
-          else navigate('/');
-        })
-    }
-    catch (e) {
-      console.log(e);
-    }
-  }
+        pass,
+      });
 
-  return (
+      if (response.data === 'fail') {
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 4000);
+      } else {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
+  };
+
+  // Initialize Google login
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      // Handle Google login success
+      console.log('Google login success:', codeResponse);
+    },
+    onError: (error) => {
+      // Handle Google login error
+      console.log('Google login failed:', error);
+    },
+  });
+
+
+return (
     <>
       {
-        showalert ?
+        showAlert ?
           <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg  dark:bg-gray-800 dark:text-blue-400 bg-red-400" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />

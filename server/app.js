@@ -1,26 +1,32 @@
 require('dotenv').config();
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 const cors = require("cors");
+const session = require('express-session');
 const connectDB = require('./database/connectDB');
 //const chatgpt = require('../server/chatgpt.js');
 const User = require('./models/user.js');
 const gpt = require('./gpt.js')
 
+
+const app = express();
+
+app.use(session({
+  secret: 'your secret key',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+      mongoUrl: process.env.DB_URI
+  }),
+  cookie: { maxAge: 10 * 60 * 60 * 1000 }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cors());
-
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-      user:"ajaysbiradar3@gmail.com",
-      pass: "lqhvdmghcavraxop"
-    }
-})
 
 connectDB();
 
@@ -55,32 +61,35 @@ app.post('/',async(req,res)=>{
       })
 })
 
-app.post('/signup',async (req,res)=>{
-    otp = Math.floor(100000 + Math.random() * 900000);
-    const {mail} = req.body;
-    const mailOptions = {
-      from: 'ajaysbiradar3@gmail.com',
-      to: mail,
-      subject: 'OTP',
-      text: otp.toString()
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
+// app.post('/signup',async (req,res)=>{
+//     otp = Math.floor(100000 + Math.random() * 900000);
+//     const {mail} = req.body;
+//     const mailOptions = {
+//       from: 'ajaysbiradar3@gmail.com',
+//       to: mail,
+//       subject: 'OTP',
+//       text: otp.toString()
+//     };
+//     transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
   
-        } else {
-          res.json(otp);
-        }
-    });
-})
+//         } else {
+//           res.json(otp);
+//         }
+//     });
+// })
 
-//chatgpt();
+//gpt();
 
-//chatgpt();
-gpt();
+app.post('/user', (req, res) => {
+  res.json({ user: req.user });
+  console.log("Whassap my niggas");
+});
+
 
 app.post('/info',async (req,res)=>{
   console.log(req.body);
-  res.json("hoiii");
+  
 })
 
 app.listen(5001,()=>{
