@@ -5,6 +5,7 @@ const userSchema = new Schema({
     userID: {
         type: String,
         required: true,
+        unique:true
     },
     name:{
         type:String,
@@ -18,6 +19,7 @@ const userSchema = new Schema({
     phone:{
         type: String,
         required: true,
+        unique:true,
         length: 10
     },
     gender:{
