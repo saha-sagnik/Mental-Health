@@ -15,7 +15,7 @@ const Show = ()=>{
                 info
             })
             .then(res=>{
-                // console.log(res)
+                localStorage.setItem('disorder',JSON.stringify(res.data));
             })
         }
         catch(e){

@@ -9,26 +9,24 @@ const userSchema = new Schema({
     },
     name:{
         type:String,
-        required: true,
         trim: true,
+    },
+    photo:{
+        type: String
     },
     gender:{
         type: String,
-        required: true,
         enum: ["M","F","T","N"] //male,female,trans,prefer not to say
     },
     ageGroup:{
         type: String,
-        required: true,
     },
     diagnosis: {
         type: [String],
         enum: ["Anxiety Disorders","Depression","PTSD","OCD","Bipolar Disorder","Schizophrenia","Eating Disorders","Substance Use Disorders","ADHD"],
-        required: true,
     },
     category:{
         type: String,
-        required: true,
         enum: ["Couple","Teenager","Elderly","Personal"]
     },
 });

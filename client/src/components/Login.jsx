@@ -19,7 +19,7 @@ const Login = () => {
   // Define the function to check authentication status
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/user');
+      const response = await axios.get('http://localhost:5001/');
       if (response.data.user) {
         navigate('/dashboard');
       }
@@ -55,16 +55,16 @@ const Login = () => {
   };
 
   // Initialize Google login
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      // Handle Google login success
-      console.log('Google login success:', codeResponse);
-    },
-    onError: (error) => {
-      // Handle Google login error
-      console.log('Google login failed:', error);
-    },
-  });
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => {
+  //     // Handle Google login success
+  //     console.log('Google login success:', codeResponse);
+  //   },
+  //   onError: (error) => {
+  //     // Handle Google login error
+  //     console.log('Google login failed:', error);
+  //   },
+  // });
 
 
 return (
@@ -131,8 +131,9 @@ return (
                 </p>
               </div>
                 <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'
-                  onClick={()=>{
-                    login();
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    window.open('http://localhost:5001/auth/google')
                   }}
                 >
                   <img className='pl-10 w-16' src={google} />

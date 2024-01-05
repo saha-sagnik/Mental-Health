@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const session = require('express-session');
 const connectDB = require('./database/connectDB');
-//const chatgpt = require('../server/chatgpt.js');
 const passport = require('passport');
 const MongoStore = require('connect-mongo');
 const User = require('./models/user.js');
@@ -14,7 +13,7 @@ const auth=require('./auth.js');
 const app = express();
 
 app.use(session({
-  secret: 'your secret key',
+  secret: 'yoursecretkey',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
@@ -23,7 +22,7 @@ app.use(session({
   cookie: { maxAge: 10 * 60 * 60 * 1000 }
 }));
 
-app.use('/auth',auth);
+app.use('/',require('./auth.js'));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -35,42 +34,10 @@ app.use(cors());
 connectDB();
 
 app.get('/',cors(),(req,res)=>{
-})
-
-app.post('/',async(req,res)=>{
-    const {mail,pass} = req.body;
-    console.log(mail);
-
-    User.findOne({email:mail}).then((users)=>{
-        if (users) {
-          // User exists in the database
-          console.log('User found:', users);
-          // Perform actions for existing user 
-          if(users.password===pass){
-            console.log("Successful in login")
-            res.json("success");
-          }
-          else{
-            console.log('password and username not matched')
-            res.json("fail");
-          }
-        } else {
-          console.log('User not found');
-          res.json("fail");
-        }
-    
-      })
-      .catch((err)=>{
-        res.json("fail");
-      })
-})
+ })
 
 //gpt();
 
-app.post('/user', (req, res) => {
-  res.json({ user: req.user });
-  console.log("Whassap my niggas");
-});
 
 app.post('/info',async (req,res)=>{
   console.log("This is the info that is coming from /info route: ",req.body.info);
@@ -107,5 +74,5 @@ app.post('/info',async (req,res)=>{
 });
 
 app.listen(5001,()=>{
-    console.log("running at 5001");
+    console.log("Server running at port 5001");
 })
