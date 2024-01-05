@@ -27,7 +27,6 @@ const AppLayout = ()=>{
       <Help/>
       <Navbar />
       <Outlet />
-      <WhyChooseUs />
       <Footer />
     </GoogleOAuthProvider>
     </Provider>
@@ -41,7 +40,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>]
+        element:[<Hero />,<Services/>,<WhyChooseUs />]
       },
       {
         path:'/card/:id',
