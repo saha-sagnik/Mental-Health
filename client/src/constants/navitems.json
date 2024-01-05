@@ -1,6 +1,7 @@
 [
     {
-        "item":"Home"
+        "item":"Home",
+        "link":""
     },
     {
         "item":"About"
@@ -9,6 +10,11 @@
         "item":"Services"
     },
     {
-        "item":"Dashboard"
+        "item":"Dashboard",
+        "link": "/dashboard"
+    },
+    {
+        "item":"Your Results",
+        "link":"/show"
     }
 ]

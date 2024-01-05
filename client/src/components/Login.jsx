@@ -7,7 +7,8 @@ import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
 import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setName } from '../store/InfoSlice.js';
 
 // Login.jsx
 const Login = () => {

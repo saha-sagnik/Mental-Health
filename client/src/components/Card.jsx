@@ -1,4 +1,3 @@
-// Quiz.js
 import React, { useEffect, useState } from 'react';
 import { QuizData } from '../constants/data.js';
 import QuizResult from './QuizResult.jsx';
@@ -10,11 +9,6 @@ function Quiz() {
 
     const navigate = useNavigate();
   const status = useSelector(Store=>Store.info.loggedIn) ;
-//     if(!status){
-//     navigate('/login');
-//     console.log(status);
-//   }
-
   const { id } = useParams();
   const cardId = `card${id}`;
   const [currentQuestion, setCurrentQuestion] = useState(0);
