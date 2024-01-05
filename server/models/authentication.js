@@ -1,25 +1,29 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const validator = require('validator'); // Assuming you use a validation library just do [npm install validator]
 
 const authSchema = new Schema({
-    UserID:{
-        type:String,
-        required: true,
-        trim: true,
-        unique: true
-    },
-    emailID:{
-        type:String,
+    user: {
+        type: String,
         required: true,
         trim: true,
         unique: true,
-        lowercase: true
-
     },
-    passwrd:{
-        type:String,
-        required: true
-    }
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
+        lowercase: true,
+        validate: {
+            validator: (value) => validator.isEmail(value),
+            message: 'Invalid email format',
+        },
+    },
+    password: {
+        type: String,
+        required: true,
+    },
 });
 
-module.exports = mongoose.model('Auth',authSchema);
+module.exports = mongoose.model('Auth', authSchema);
