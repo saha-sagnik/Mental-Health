@@ -5,10 +5,6 @@ import axios from "axios";
 
 const Show = ()=>{
     const info = useSelector(Store=>Store.info.info) ;
-    useEffect(()=>{
-        // console.log(info)
-    },[]);
-
     async function submit(){
         try{
             await axios.post("http://localhost:5001/info",{
