@@ -15,7 +15,8 @@ const Show = () => {
                 info
             })
                 .then(res => {
-                    // console.log(res)
+                    console.log(res)
+                    localStorage.setItem('diagonsis',JSON.stringify(res.data));
                 })
         }
         catch (e) {

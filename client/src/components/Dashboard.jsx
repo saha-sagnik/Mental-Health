@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const LeftSide = () => {
@@ -29,14 +29,21 @@ const LeftSide = () => {
 }
 
 const RightSide = () => {
+    const [data,setData] = useState();
+
+    useEffect( ()=>{
+        const info = JSON.parse(localStorage.getItem('diagonsis')); 
+        setData(info);
+   },[]);
+
     const generateTabs = () => {
         const tabs = [
-            {label: 'Overview', color: 'blue-500', href: '#' },
-            {label: 'Assessments', color: 'blue-800', href: '#' },
-            {label: 'Therapy Sessions', color: 'blue-500', href: '#' },
-            {label: 'Goals and Progress', color:'blue-500',href:'#'},
-            {label:'Community Services', color:'blue-500',href:'#'},
-            {label:'Survey',color:'blue-500',href:'#'},
+            {label: 'Overview', color: 'blue-500', linkto: '#' },
+            {label: 'Assessments', color: 'blue-800', linkto: '#' },
+            {label: 'Therapy Sessions', color: 'blue-500', linkto: '#' },
+            {label: 'Goals and Progress', color:'blue-500',linkto:'#'},
+            {label:'Community Services', color:'blue-500',linkto:'#'},
+            {label:'Survey',color:'blue-500',linkto:'#'},
         ];
 
         return tabs.map((tab, index) => (
@@ -53,11 +60,17 @@ const RightSide = () => {
                     {generateTabs()}
                 </ul>
             </div>
-            <div className="bg-white p-3  rounded-sm">
-               
-                
-            </div>
+            <div className="bg-white p-3 text-red-700 rounded-sm">
+               {data?.disorder_name}
             
+            <div>
+                {data?.assessment.map((x)=>{
+                    return(
+                        <h1>{x}</h1>
+                    )
+                })}
+            </div>
+            </div>
         </div>
     );
 }
@@ -71,7 +84,7 @@ const Dashboard = () => {
                 </div>
                 <div className="bg-blue-300 max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <h1 className="text-3xl font-sans tracking-tight text-gray-900">
-                        Your Name
+                        Sagnik
                     </h1>
                     <p className="ml-10"></p>
                 </div>

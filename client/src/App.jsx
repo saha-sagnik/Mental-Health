@@ -46,7 +46,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>,<WhyChooseUs />,<OurDoctors />]
+        element:[<Hero />,<Services/>,<OurDoctors />]
       },
       {
         path:'/card/:id',

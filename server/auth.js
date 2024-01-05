@@ -43,7 +43,7 @@ router.get('/google/callback',
   passport.authenticate('google',{successRedirect: '/', failureRedirect: '/login-failure'}),
   (req, res) => {
     // If authentication is successful, this callback will be executed
-    res.redirect('/');
+    window.location('http://localhost:5173/');
   }
 );
 

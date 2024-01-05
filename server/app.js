@@ -80,7 +80,7 @@ app.post('/info',async (req,res)=>{
 }
   console.log("This is the message that should be given as prompt:",message);
   message+=`.From this questionnaire understand and diagnose from these disorders: Anxiety Disorders,Depression,PTSD,OCD,Bipolar Disorder,Schizophrenia,Eating Disorders,Substance Use Disorders,ADHD which disorder
-  is the user likely to have? Give the response as a JSON object such that it has disorder name and index number considering the options I gave above as an array.`
+  is the user likely to have? Give the response as a JSON object such that it has disorder name, index number and the complete assessment considering the options I gave above as an array.`
   
   let GeminiResponse = await gpt(message);
   console.log("Gemini gives this response: ",GeminiResponse, typeof(GeminiResponse));
