@@ -3,15 +3,9 @@ const Schema = mongoose.Schema;
 const validator = require('validator'); // Assuming you use a validation library just do [npm install validator]
 
 const authSchema = new Schema({
-    user: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-    },
+   
     email: {
         type: String,
-        required: true,
         trim: true,
         unique: true,
         lowercase: true,
@@ -22,7 +16,6 @@ const authSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
     },
 });
 
