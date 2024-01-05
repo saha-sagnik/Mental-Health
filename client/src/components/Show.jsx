@@ -25,21 +25,27 @@ const Show = ()=>{
     submit();
     return(
         <>
-        <h1 className="text-4xl" >Your Responses</h1>
+          
+        <h1 className="text-4xl flex justify-center bg-red-400 p-4 font-semibold font-sans" >Your Responses🤲</h1>
             {
+                
                 info.map((x)=>{
                     return(
-                        <div>
-                            <h1>{x.ques}</h1>
+                        <div className="bg-black flex-col items-center justify-center ">
+                        <div className="flex flex-row gap-4 bg-slate-400 w-[50vw] justify-center">
+                            <h1 className="bg-yellow-500 text-pretty text-lg">{x.ques}</h1>
+                            
                             {x?.data.map((ans)=>{
                                 return (
-                                    <h1>{ans}</h1>
+                                    <h1 className="bg-red-500">{ans}</h1>
                                 )
                             })}
+                            </div>
                         </div>
                     )
                 })
             }
+              
         </>
     )
 }
