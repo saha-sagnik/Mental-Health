@@ -72,12 +72,10 @@ app.post('/signup',async (req,res)=>{
     });
 })
 
-app.post('/googlelogin',async(req,res)=>{
-    console.log(req.body);
-    res.json("got it");
+app.post('/info',async (req,res)=>{
+  console.log(req.body);
+  res.json("hoiii");
 })
-
-gpt();
 
 app.listen(5001,()=>{
     console.log("running at 5001");

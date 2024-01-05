@@ -12,12 +12,18 @@ import OurDoctors from "./components/ourDoctors";
 import './index.css'
 import Services from "./components/Services";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Card from "./components/Card";
+import Store from '../src/store/Store'
+import { Provider, useSelector } from 'react-redux';
+import Show from "./components/Show";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const AppLayout = ()=>{
+
   return (
-    <>
+    <Provider store={Store}>
     <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
       <Help/>
       <Navbar />
@@ -26,7 +32,7 @@ const AppLayout = ()=>{
       <OurDoctors />
       <Footer />
     </GoogleOAuthProvider>
-    </>
+    </Provider>
   )
 }
 
@@ -37,18 +43,30 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>]
+        element:[<Hero />,<Services/>,<WhyChooseUs />]
       },
       {
-        path:'/login',
-        element:<Login />
+        path:'/card/:id',
+        element:<Card/>
       },
       {
-        path:'/signup',
-        element:<SignUp />
+        path:'/show',
+        element:<Show />
       }
     ]
-  }
+  },
+  {
+    path:'/login',
+    element:<GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
+            <Login />
+          </GoogleOAuthProvider>
+  },
+  {
+    path:'/signup',
+    element:<GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
+              <SignUp />
+            </GoogleOAuthProvider>
+  },
 ])
 
 root.render(<RouterProvider router={appRouter} />) ;
