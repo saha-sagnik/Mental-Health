@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import WhyChooseUs from "./components/WhyChooseUs";
+import OurDoctors from "./components/ourDoctors";
 import './index.css'
 import Services from "./components/Services";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -22,6 +23,7 @@ const AppLayout = ()=>{
       <Navbar />
       <Outlet />
       <WhyChooseUs />
+      <OurDoctors />
       <Footer />
     </GoogleOAuthProvider>
     </>

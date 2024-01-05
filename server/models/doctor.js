@@ -7,9 +7,13 @@ const doctorSchema = new Schema({
         required: true,
         trim: true,
     },
+    gender:{
+        type: String,
+        required: true,
+    },
     specialisation: {
-        type: Number,
-        enum: [1,2,3,4,5,10],
+        type: [String],
+        enum: ["Anxiety Disorders","Depression","PTSD","OCD","Bipolar Disorder","Schizophrenia","Eating Disorders","Substance Use Disorders","ADHD"],
         required: true,
     },
     contact: {
