@@ -20,12 +20,12 @@ import Show from "./components/Show";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const AppLayout = ()=>{
-  const navigate = useNavigate();
-  const status = useSelector(Store=>Store.info.loggedIn) ;
-    if(!status){
-    navigate('/login');
-    console.log(status);
-  }
+  // const navigate = useNavigate();
+  // const status = useSelector(Store=>Store.info.loggedIn) ;
+  //   if(!status){
+  //   navigate('/login');
+  //   console.log(status);
+  // }
   return (
     <Provider store={Store}>
     <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">

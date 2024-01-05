@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const [loggedin,setLoggedIn] = useState();
-  const status = useSelector(Store=>Store.info.loggedIn) ;
-  // setLoggedIn(status);
-    if(!status){
-    navigate('/login');
-  }
+  // const [loggedin,setLoggedIn] = useState();
+  // const status = useSelector(Store=>Store.info.loggedIn) ;
+  // // setLoggedIn(status);
+  //   if(!status){
+  //   navigate('/login');
+  // }
 
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">

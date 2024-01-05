@@ -10,10 +10,10 @@ function Quiz() {
 
     const navigate = useNavigate();
   const status = useSelector(Store=>Store.info.loggedIn) ;
-    if(!status){
-    navigate('/login');
-    console.log(status);
-  }
+//     if(!status){
+//     navigate('/login');
+//     console.log(status);
+//   }
 
   const { id } = useParams();
   const cardId = `card${id}`;

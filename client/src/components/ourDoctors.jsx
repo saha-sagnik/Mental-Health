@@ -7,10 +7,11 @@ const api = "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/";
 const OurDoctors = () => {
     const [doc,setDoc] = useState(0);
     setTimeout(()=>{
-        if(doc==3){
+        if(doc==4){
             setDoc(0);
         }
-        setDoc(doc+1);
+        else
+          setDoc(doc+1);
     },2000)
   return (
     <section className="dark:bg-gray-900 h-[34vw]">
