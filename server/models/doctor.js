@@ -10,6 +10,7 @@ const doctorSchema = new Schema({
     gender:{
         type: String,
         required: true,
+        enum: ["M","F"] //male,female,trans,prefer not to say
     },
     specialisation: {
         type: [String],
@@ -18,6 +19,7 @@ const doctorSchema = new Schema({
     },
     contact: {
         type: String,
+        unique:true,
         required: true,
         length: 10
     },

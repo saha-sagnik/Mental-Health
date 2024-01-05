@@ -19,4 +19,13 @@ Assigning Diagnosis
         check type
         if type == couples - couples therapy
         else - therapy options according to cat
+
+
+*/
+
+/*
+Assigning Date
+    occupied_day_list = select distint(day) from treatment where DID = <did>;
+    display all the days NOT in occupied_day_list
+    
 */
