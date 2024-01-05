@@ -1,9 +1,12 @@
 import React from 'react'
 import 'flowbite'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const loggedin = useSelector(Store=>Store.info.loggedIn) ;
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -23,6 +26,9 @@ const Navbar = () => {
                 )
               })
             }
+            <li>
+              <Link to='/show' class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Show</Link>
+            </li>
           </ul>
         </div>
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">

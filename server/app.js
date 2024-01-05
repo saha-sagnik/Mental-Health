@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const connectDB = require('./database/connectDB');
 //const chatgpt = require('../server/chatgpt.js');
+const User = require('./models/user.js');
+const gpt = require('./gpt.js')
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -34,7 +36,7 @@ app.post('/',async(req,res)=>{
           // User exists in the database
           console.log('User found:', users);
           // Perform actions for existing user 
-          if(users.password==pass){
+          if(users.password===pass){
             console.log("Successful in login")
             res.json("success");
           }
@@ -73,6 +75,14 @@ app.post('/signup',async (req,res)=>{
 
 //chatgpt();
 
-app.listen(8001,()=>{
+//chatgpt();
+gpt();
+
+app.post('/info',async (req,res)=>{
+  console.log(req.body);
+  res.json("hoiii");
+})
+
+app.listen(5001,()=>{
     console.log("running at 5001");
 })

@@ -19,6 +19,11 @@ const userSchema = new Schema({
         type: Number,
         required: true,
     },
+    diagnosis: {
+        type: Number,
+        enum: [1,2,3,4,5,10],
+        required: true,
+    },
     score:{
         type: Number,
         required: true,
@@ -27,7 +32,7 @@ const userSchema = new Schema({
     category:{
         type: String,
         required: true,
-        enum: ["Couple","Teenager","Old","Personal"]
+        enum: ["Couple","Teenager","Elderly","Personal"]
     },
 });
 

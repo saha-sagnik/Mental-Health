@@ -14,11 +14,6 @@ const treatmentSchema = new Schema({
         ref: "Doctor",
         required: true
     },
-    diagnosis: {
-        type: Number,
-        enum: [1,2,3,4,5,10],
-        required: true,
-    },
     day:{
         type: String,
         required: true,
