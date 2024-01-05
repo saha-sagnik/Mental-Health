@@ -31,11 +31,7 @@ const Show = ()=>{
                     return(
                         <div>
                             <h1>{x.ques}</h1>
-                            {x?.data.map((ans)=>{
-                                return (
-                                    <h1>{ans}</h1>
-                                )
-                            })}
+                            <h1>{x.data}</h1>
                         </div>
                     )
                 })
