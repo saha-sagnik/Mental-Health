@@ -12,23 +12,13 @@ const userSchema = new Schema({
         required: true,
         trim: true,
     },
-    DOB:{
-        type: Date,
-        required: true,
-    },
-    phone:{
-        type: String,
-        required: true,
-        unique:true,
-        length: 10
-    },
     gender:{
         type: String,
         required: true,
         enum: ["M","F","T","N"] //male,female,trans,prefer not to say
     },
-    age:{
-        type: Number,
+    ageGroup:{
+        type: String,
         required: true,
     },
     diagnosis: {

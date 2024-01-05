@@ -9,7 +9,7 @@ const passport = require('passport');
 const MongoStore = require('connect-mongo');
 const User = require('./models/user.js');
 const gpt = require('./gpt.js')
-
+const auth=require('./auth.js');
 
 const app = express();
 
@@ -22,6 +22,8 @@ app.use(session({
   }),
   cookie: { maxAge: 10 * 60 * 60 * 1000 }
 }));
+
+app.use('/auth',auth);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -62,24 +64,6 @@ app.post('/',async(req,res)=>{
         res.json("fail");
       })
 })
-
-// app.post('/signup',async (req,res)=>{
-//     otp = Math.floor(100000 + Math.random() * 900000);
-//     const {mail} = req.body;
-//     const mailOptions = {
-//       from: 'ajaysbiradar3@gmail.com',
-//       to: mail,
-//       subject: 'OTP',
-//       text: otp.toString()
-//     };
-//     transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-  
-//         } else {
-//           res.json(otp);
-//         }
-//     });
-// })
 
 //gpt();
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('./models/user.js');
+const Auth = require('./models/authentication.js');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET_KEY);
 
@@ -22,12 +22,12 @@ passport.use(new GoogleStrategy({
   };
 
     try{
-        let user = await User.findOne({googleId: profile.id});
+        let user = await Auth.findOne({googleId: profile.id});
         if(user)
         done(null,user);
         else{
         newUser.firstName = cryptr.encrypt(newUser.firstName);  
-        user = await User.create(newUser);
+        user = await Auth.create(newUser);
         done(null,user);
         }
     }
@@ -37,13 +37,13 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.get('/auth/google',
+router.get('/google',
   passport.authenticate('google', { scope: ['email','profile'] }));
-  router.get('/auth/google/callback', 
-  passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login-failure' }),
+router.get('/google/callback', 
+  passport.authenticate('google',{successRedirect: '/', failureRedirect: '/login-failure'}),
   (req, res) => {
     // If authentication is successful, this callback will be executed
-    res.redirect('/dashboard');
+    res.redirect('/');
   }
 );
 
@@ -71,7 +71,7 @@ passport.serializeUser(function(user,done){
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id);
+    const user = await Auth.findById(id);
     done(null, user);
   } catch (err) {
     done(err, null);
