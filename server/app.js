@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require("cors");
 const connectDB = require('./database/connectDB');
+const User = require('./models/user.js');
+const gpt = require('./gpt.js')
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
@@ -33,7 +35,7 @@ app.post('/',async(req,res)=>{
           // User exists in the database
           console.log('User found:', users);
           // Perform actions for existing user 
-          if(users.password==pass){
+          if(users.password===pass){
             console.log("Successful in login")
             res.json("success");
           }
