@@ -36,11 +36,6 @@ const userSchema = new Schema({
         enum: ["Anxiety Disorders","Depression","PTSD","OCD","Bipolar Disorder","Schizophrenia","Eating Disorders","Substance Use Disorders","ADHD"],
         required: true,
     },
-    // score:{
-    //     type: Number,
-    //     required: true,
-    //     default: -1
-    // },
     category:{
         type: String,
         required: true,
