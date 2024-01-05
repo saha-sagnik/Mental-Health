@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require("cors");
 const connectDB = require('./database/connectDB');
+//const chatgpt = require('../server/chatgpt.js');
 const User = require('./models/user.js');
 const gpt = require('./gpt.js')
 
@@ -71,6 +72,11 @@ app.post('/signup',async (req,res)=>{
         }
     });
 })
+
+//chatgpt();
+
+//chatgpt();
+gpt();
 
 app.post('/info',async (req,res)=>{
   console.log(req.body);
