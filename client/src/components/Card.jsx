@@ -26,7 +26,6 @@ function Quiz() {
 
   useEffect(() => {
     const storedInfo = JSON.parse(localStorage.getItem('info'));
-    setItems(storedInfo || []);
   }, []);
 
   const handleAdd = async () => {
@@ -83,7 +82,7 @@ function Quiz() {
                     }`}
                     onClick={() => {
                       setClickedOption(i + 1);
-                      setItems([option]);
+                      setItems(option);
                     }}
                   >
                     {option}
@@ -97,7 +96,7 @@ function Quiz() {
                 onClick={async () => {
                   changeQuestion();
                   handleAdd(currentQuestion);
-                  setItems([]);
+                  setItems();
                 }}
               />
             </div>
