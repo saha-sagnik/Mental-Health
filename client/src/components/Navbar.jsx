@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'flowbite'
 import { Link, useNavigate } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
@@ -6,10 +6,13 @@ import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const loggedin = useSelector(Store=>Store.info.loggedIn) ;
-  if(!loggedin){
-    navigate('/login');
-  }
+  // const [loggedin,setLoggedIn] = useState();
+  // const status = useSelector(Store=>Store.info.loggedIn) ;
+  // // setLoggedIn(status);
+  //   if(!status){
+  //   navigate('/login');
+  // }
+
   return (
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

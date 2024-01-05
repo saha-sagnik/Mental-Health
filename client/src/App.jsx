@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from './components/Login';
 import Help from "./components/Help";
@@ -17,19 +17,21 @@ import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const AppLayout = ()=>{
-
+  // const navigate = useNavigate();
+  // const status = useSelector(Store=>Store.info.loggedIn) ;
+  //   if(!status){
+  //   navigate('/login');
+  //   console.log(status);
+  // }
   return (
     <Provider store={Store}>
     <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
       <Help/>
       <Navbar />
       <Outlet />
-      <WhyChooseUs />
-      <OurDoctors />
       <Footer />
     </GoogleOAuthProvider>
     </Provider>
@@ -39,11 +41,11 @@ const AppLayout = ()=>{
 const appRouter = createBrowserRouter([
   {
     path:'/',
-    element:<AppLayout/>,
+    element:<Provider store={Store}><AppLayout/></Provider>,
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>,<WhyChooseUs />]
+        element:[<Hero />,<Services/>,<WhyChooseUs />,<OurDoctors />]
       },
       {
         path:'/card/:id',

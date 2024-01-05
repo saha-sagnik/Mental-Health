@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import doctorItems from '../constants/doctoritems.json';
 import docList from '../constants/doctor.json'
 
@@ -6,12 +6,18 @@ const api = "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/";
 
 const OurDoctors = () => {
     const [doc,setDoc] = useState(0);
-    setTimeout(()=>{
-        if(doc==3){
-            setDoc(0);
+    useEffect(() => {
+      const timerId = setTimeout(() => {
+        if (doc === 4) {
+          setDoc(0);
+        } else {
+          setDoc(doc + 1);
         }
-        setDoc(doc+1);
-    },2000)
+      }, 2000);
+  
+      //cling the timer
+      return () => clearTimeout(timerId);
+    }, [doc]);
   return (
     <section className="dark:bg-gray-900 h-[34vw]">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 relative">

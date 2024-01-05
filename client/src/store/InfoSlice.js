@@ -4,7 +4,7 @@ const infoSlice = createSlice({
     name:'cart',
     initialState:{
         info:[],
-        loggedIn:false,
+        loggedIn:true,
         user:null
     },
     reducers: {

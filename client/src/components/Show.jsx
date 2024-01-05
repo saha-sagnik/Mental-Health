@@ -6,7 +6,7 @@ import axios from "axios";
 const Show = ()=>{
     const info = useSelector(Store=>Store.info.info) ;
     useEffect(()=>{
-        console.log(info)
+        // console.log(info)
     },[]);
 
     async function submit(){
@@ -15,7 +15,7 @@ const Show = ()=>{
                 info
             })
             .then(res=>{
-                console.log(res)
+                // console.log(res)
             })
         }
         catch(e){
@@ -24,7 +24,23 @@ const Show = ()=>{
     }
     submit();
     return(
-        <>hii</>
+        <>
+        <h1 className="text-4xl" >Your Responses</h1>
+            {
+                info.map((x)=>{
+                    return(
+                        <div>
+                            <h1>{x.ques}</h1>
+                            {x?.data.map((ans)=>{
+                                return (
+                                    <h1>{ans}</h1>
+                                )
+                            })}
+                        </div>
+                    )
+                })
+            }
+        </>
     )
 }
 

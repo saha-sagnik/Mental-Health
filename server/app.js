@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const session = require('express-session');
 const connectDB = require('./database/connectDB');
-const passport = require('passport');
-const authRoute = require('./auth.js');
-const MongoStore = require('connect-mongo');
+//const chatgpt = require('../server/chatgpt.js');
 const User = require('./models/user.js');
 const gpt = require('./gpt.js')
 
