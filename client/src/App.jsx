@@ -16,6 +16,7 @@ import Card from "./components/Card";
 import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
+import Dashboard from "./components/Dashboard";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -54,7 +55,11 @@ const appRouter = createBrowserRouter([
       {
         path:'/show',
         element:<Show />
-      }
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard/>
+      },
     ]
   },
   {
