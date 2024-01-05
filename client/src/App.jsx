@@ -38,7 +38,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>,<WhyChooseUs />]
+        element:[<Hero />,<Services/>]
       },
       {
         path:'/login',
