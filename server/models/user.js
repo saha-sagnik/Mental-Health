@@ -15,20 +15,30 @@ const userSchema = new Schema({
         type: Date,
         required: true,
     },
+    phone:{
+        type: String,
+        required: true,
+        length: 10
+    },
+    gender:{
+        type: String,
+        required: true,
+        enum: ["M","F","T","N"] //male,female,trans,prefer not to say
+    },
     age:{
         type: Number,
         required: true,
     },
     diagnosis: {
-        type: Number,
-        enum: [1,2,3,4,5,10],
+        type: [String],
+        enum: ["Anxiety Disorders","Depression","PTSD","OCD","Bipolar Disorder","Schizophrenia","Eating Disorders","Substance Use Disorders","ADHD"],
         required: true,
     },
-    score:{
-        type: Number,
-        required: true,
-        default: -1
-    },
+    // score:{
+    //     type: Number,
+    //     required: true,
+    //     default: -1
+    // },
     category:{
         type: String,
         required: true,
