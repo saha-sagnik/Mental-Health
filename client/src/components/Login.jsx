@@ -55,7 +55,7 @@ const Login = () => {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       // Handle Google login success
-      handleUser(codeResponse.access_token);
+      console.log('Google login success:', codeResponse);
     },
     onError: (error) => {
       // Handle Google login error
@@ -128,8 +128,9 @@ return (
                 </p>
               </div>
                 <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'
-                  onClick={()=>{
-                    login();
+                  onClick={(e)=>{
+                    e.preventDefault();
+                    window.open('http://localhost:5001/auth/google')
                   }}
                 >
                   <img className='pl-10 w-16' src={google} />

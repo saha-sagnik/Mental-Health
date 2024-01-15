@@ -20,8 +20,8 @@ const Dashboard = () => {
                     <img className="flex-1 w-48 h-48 rounded-full shadow-lg" src="/" alt="" />
                 </div>
                 <div className="bg-blue-300 max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-medium text-wrap tracking-tight text-gray-900">
-                        {user?.name}
+                    <h1 className="text-3xl font-sans tracking-tight text-gray-900">
+                        Your Name
                     </h1>
                     {
                         Result && <h1 className="text-3xl font-medium text-wrap tracking-tight text-red-900">

@@ -1,4 +1,4 @@
-exports. isLoggedIn = function(req,res,next){
+module.exports = function isLoggedIn (req,res,next){
     if(req.user){
         next();
     }
