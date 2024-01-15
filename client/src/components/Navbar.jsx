@@ -1,18 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import 'flowbite'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeUser } from '../store/InfoSlice'
 
 const Navbar = () => {
-  const navigate = useNavigate()
-  // const [loggedin,setLoggedIn] = useState();
-  // const status = useSelector(Store=>Store.info.loggedIn) ;
-  // // setLoggedIn(status);
-  //   if(!status){
-  //   navigate('/login');
-  // }
-
+  const dispatch = useDispatch();
+  const user = useSelector(Store=>Store.info.user);
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -37,14 +32,33 @@ const Navbar = () => {
       </div>
 
       <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <Link to="/login">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Get started
-          </button>
-        </Link>
+        {
+          user?<>
+              <div>
+                <h1 className='flex font-medium items-start text-xl px-4 py-2' >{user.name}</h1>
+              </div>
+              <Link to="/login">
+              <button
+                onClick={()=>{
+                  dispatch(removeUser());
+                }}
+                type="button"
+                className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Logout
+              </button>
+            </Link>
+            </>
+          :
+            <Link to="/login">
+              <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Get started
+              </button>
+            </Link>
+        }
         <button
           data-collapse-toggle="navbar-cta"
           type="button"

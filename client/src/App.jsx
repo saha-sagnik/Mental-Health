@@ -29,12 +29,10 @@ const AppLayout = ()=>{
   // }
   return (
     <Provider store={Store}>
-    <GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
       <Help/>
       <Navbar />
       <Outlet />
       <Footer />
-    </GoogleOAuthProvider>
     </Provider>
   )
 }
@@ -46,7 +44,7 @@ const appRouter = createBrowserRouter([
     children:[
       {
         path:'/',
-        element:[<Hero />,<Services/>,<WhyChooseUs />,<OurDoctors />]
+        element:[<Hero />,<Services/>,<OurDoctors />]
       },
       {
         path:'/card/:id',
@@ -64,9 +62,10 @@ const appRouter = createBrowserRouter([
   },
   {
     path:'/login',
-    element:<GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
+    element:<Provider store={Store}><GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
             <Login />
           </GoogleOAuthProvider>
+      </Provider>
   },
   {
     path:'/signup',

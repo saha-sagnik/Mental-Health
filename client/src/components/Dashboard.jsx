@@ -1,68 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import LeftSide from './LeftSide';
+import RightSide from './RightSide';
 
-const LeftSide = () => {
-    const generateListItems = () => {
-        const items = [
-            { label: 'Phone', value: '1234567890' },
-            { label: 'Emergency', value: '108' },
-            // Add more items as needed
-        ];
-
-        return items.map((item, index) => (
-            <li key={index} className="items-center py-3">
-                <span>{item.label}</span><br />
-                <span className="ml-auto">{item.value}</span>
-            </li>
-        ));
-    };
-
-    return (
-        <div className="w-full md:w-3/12">
-            <div className="p-3">
-                <ul className="text-sm font-semibold text-gray-500 hover:text-gray-700 py-2 px-3 mt-3 divide-y rounded bg-white">
-                    {generateListItems()}
-                </ul>
-            </div>
-        </div>
-    );
-}
-
-const RightSide = () => {
-    const generateTabs = () => {
-        const tabs = [
-            {label: 'Overview', color: 'blue-500', href: '#' },
-            {label: 'Assessments', color: 'blue-800', href: '#' },
-            {label: 'Therapy Sessions', color: 'blue-500', href: '#' },
-            {label: 'Goals and Progress', color:'blue-500',href:'#'},
-            {label:'Community Services', color:'blue-500',href:'#'},
-            {label:'Survey',color:'blue-500',href:'#'},
-        ];
-
-        return tabs.map((tab, index) => (
-            <li key={index} className="mr-1">
-                <a className={`rounded-sm bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-${tab.color} hover:text-blue-800 font-semibold`} href={tab.href}>{tab.label}</a>
-            </li>
-        ));
-    };
-
-    return (
-        <div className="w-full mx-2 md:block lg:block md:-mt-24 sm:mt-0">
-            <div className="hidden md:block lg:block">
-                <ul className="flex bg-white">
-                    {generateTabs()}
-                </ul>
-            </div>
-            <div className="bg-white p-3  rounded-sm">
-               
-                
-            </div>
-            
-        </div>
-    );
-}
 
 const Dashboard = () => {
+    const Result = useSelector(store=>store.result);
+    const user = useSelector(Store=>Store.info.user);
+    useEffect(()=>{
+      if(user===null){
+        navigate('/login');
+      }
+    },[])
     return (
         <>
             <div className="bg-blue-300 flex justify-between">
@@ -70,9 +20,14 @@ const Dashboard = () => {
                     <img className="flex-1 w-48 h-48 rounded-full shadow-lg" src="/" alt="" />
                 </div>
                 <div className="bg-blue-300 max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-sans tracking-tight text-gray-900">
-                        Your Name
+                    <h1 className="text-3xl font-medium text-wrap tracking-tight text-gray-900">
+                        {user?.name}
                     </h1>
+                    {
+                        Result && <h1 className="text-3xl font-medium text-wrap tracking-tight text-red-900">
+                                {Result?.resultInfo?.disorder_name}
+                            </h1>
+                    }
                     <p className="ml-10"></p>
                 </div>
                 <div className="bg-blue-300 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -80,20 +35,25 @@ const Dashboard = () => {
                         <div className="flex-1">
                             {/* Rest of content */}
                         </div>
-                        <div className="space-x-4 hidden lg:block md:block justify-end">
-                            <Link to="/"><button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md">Take a Test</button></Link>
-                            
-                        </div>
+                        {Result.resultInfo.length==0 &&
+                            <div className="space-x-4 hidden lg:block md:block justify-end">
+                                <Link to="/#footer" className="text-white hover:underline">
+                                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded-md">
+                                        Take a Test
+                                    </button>
+                                </Link>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
             <div className="max-w-7xl py-0">
                 <div className="md:flex no-wrap md:-mx-2">
                     <LeftSide />
-                    <RightSide />
+                    <RightSide Result={Result} />
                 </div>
             </div>
-            
+
         </>
     );
 }

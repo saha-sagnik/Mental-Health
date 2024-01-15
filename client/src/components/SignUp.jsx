@@ -71,9 +71,7 @@ const SignUp = () => {
         </div>
       </div>
     </div>
-    <div className='hidden md:block md:p-20'>
-  <img src="" alt="" className="w-80 h-full" />
-</div>
+    
   </section>
   </>
   )

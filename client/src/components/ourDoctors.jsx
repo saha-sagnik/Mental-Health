@@ -48,7 +48,6 @@ const OurDoctors = () => {
 
         <div className="lg:mt-0 lg:col-span-4 lg:flex bg-blue-600 mr-[5vw] w-[22vw] h-[26vw] rounded-lg absolute top-[9%] right-8 z-20">
           <img src={api+docList[doc].img} alt="mockup" />
-          {console.log(api+docList[doc]?.img)}
         </div>
 
         <div className="lg:mt-0 lg:col-span-4 lg:flex bg-[#a6b2ce] mr-[5vw] w-[22vw] h-[26vw] rounded-lg absolute top-[11%] right-[2%] z-10"></div>

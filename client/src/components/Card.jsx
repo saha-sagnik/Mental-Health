@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { QuizData } from '../constants/data.js';
-import QuizResult from './QuizResult.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../store/InfoSlice.js';
 
 function Quiz() {
 
-    const navigate = useNavigate();
-  const status = useSelector(Store=>Store.info.loggedIn) ;
+  const navigate = useNavigate();
+  const user = useSelector(Store=>Store.info.user);
+  useEffect(()=>{
+    if(user===null){
+      navigate('/login');
+    }
+  },[])
   const { id } = useParams();
   const cardId = `card${id}`;
   const [currentQuestion, setCurrentQuestion] = useState(0);

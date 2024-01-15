@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, json, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import 'flowbite';
@@ -7,30 +7,27 @@ import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
 import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../store/InfoSlice';
 
 // Login.jsx
 const Login = () => {
+  const navigate = useNavigate();
+  const status = useSelector(Store=>Store.info.loggedIn);
+  if(status){
+    navigate('/');
+  }
+  const dispatch = useDispatch();
+
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate();
 
-  // Define the function to check authentication status
-  const checkAuthStatus = async () => {
-    try {
-      const response = await axios.get('http://localhost:5001/user');
-      if (response.data.user) {
-        navigate('/dashboard');
-      }
-    } catch (error) {
-      console.error('Error checking authentication status:', error);
-    }
-  };
-
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
+  const handleUser =async (access_token)=>{
+    const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
+    const json = await data.json();
+    dispatch(addUser(json))
+  }
 
   // Define the function to handle form submission
   const submit = async (e) => {
@@ -58,7 +55,7 @@ const Login = () => {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       // Handle Google login success
-      console.log('Google login success:', codeResponse);
+      handleUser(codeResponse.access_token);
     },
     onError: (error) => {
       // Handle Google login error
