@@ -1,11 +1,12 @@
 import React from 'react'
 import 'flowbite'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
 import { useDispatch, useSelector } from 'react-redux'
 import { removeUser } from '../store/InfoSlice'
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(Store=>Store.info.user);
   return (
@@ -41,6 +42,7 @@ const Navbar = () => {
               <button
                 onClick={()=>{
                   dispatch(removeUser());
+                  navigate('/login')
                 }}
                 type="button"
                 className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

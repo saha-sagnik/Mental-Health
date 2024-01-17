@@ -5,7 +5,6 @@ import axios from 'axios';
 import 'flowbite';
 import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
-import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import  {addUser}  from '../store/InfoSlice';
@@ -26,39 +25,19 @@ const Login = () => {
   const handleUser =async (access_token)=>{
     const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
     const json = await data.json();
-    dispatch(addUser(json))
+    dispatch(addUser(json));
+    console.log("added user",json);
   }
 
-  // Define the function to handle form submission
   const submit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5001/', {
-        mail,
-        pass,
-      });
-
-      if (response.data === 'fail') {
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 4000);
-      } else {
-        navigate('/');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
   };
 
-  // Initialize Google login
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      // Handle Google login success
-      console.log('Google login success:', codeResponse);
+      handleUser(codeResponse.access_token)
     },
     onError: (error) => {
-      // Handle Google login error
       console.log('Google login failed:', error);
     },
   });
@@ -128,13 +107,12 @@ return (
                 </p>
               </div>
                 <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'
-                  onClick={(e)=>{
-                    e.preventDefault();
-                    window.open('http://localhost:5001/auth/google')
+                  onClick={()=>{
+                    login();
                   }}
                 >
                   <img className='pl-10 w-16' src={google} />
-                  <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
+                  <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
                 </div>
 
               <div class="flex items-center justify-between">
