@@ -8,7 +8,7 @@ import google from '../assets/google.png';
 import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../store/InfoSlice';
+import  {addUser}  from '../store/InfoSlice';
 
 // Login.jsx
 const Login = () => {
