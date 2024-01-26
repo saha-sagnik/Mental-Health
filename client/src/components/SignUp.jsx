@@ -61,7 +61,7 @@ const SignUp = () => {
                 <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
               </div>
               <div class="ml-3 text-sm">
-                <label for="remember" class="text-gray-500 dark:text-gray-300">By signing up, you are creating a PetShop account, and you agree to Petshop’s <Link className='font-medium text-blue-400 hover:underline dark:text-blue-500'>Terms of Use</Link> and <Link className='font-medium text-blue-400 hover:underline dark:text-blue-500'>Privacy Policy</Link>.</label>
+                <label for="remember" class="text-gray-500 dark:text-gray-300">By signing up, you are creating an account with MindHarbor, and you agree to MindHarbor's <Link className='font-medium text-blue-400 hover:underline dark:text-blue-500'>Terms of Use</Link> and <Link className='font-medium text-blue-400 hover:underline dark:text-blue-500'>Privacy Policy</Link>.</label>
               </div>
             </div>
             
