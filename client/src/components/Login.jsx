@@ -7,7 +7,7 @@ import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../store/InfoSlice';
+import  {addUser}  from '../store/InfoSlice';
 
 // Login.jsx
 const Login = () => {
