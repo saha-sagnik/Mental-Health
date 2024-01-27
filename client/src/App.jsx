@@ -17,6 +17,7 @@ import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
 import Dashboard from "./components/Dashboard";
+import LoggedIn from "./components/LoggedIn";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -59,8 +60,12 @@ const appRouter = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard/>
-      },
+      }
     ]
+  },
+  {
+    path:'loggedin',
+    element:< LoggedIn />
   },
   {
     path:'/login',

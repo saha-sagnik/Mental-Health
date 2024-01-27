@@ -9,7 +9,8 @@ import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import { setName } from '../store/InfoSlice.js';
-
+import { setToken } from '../store/InfoSlice.js';
+import { setUserInfo } from '../store/InfoSlice.js';
 // Login.jsx
 const Login = () => {
   const [mail, setMail] = useState('');
@@ -58,9 +59,10 @@ const Login = () => {
   // Initialize Google login
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      // Handle Google login success
-      console.log('Google login success:', codeResponse);
-      navigate('/');
+      console.log('Google login success:');
+      handleLoginInfo(codeResponse.access_token);
+
+      navigate('/loggedin');
 
     },
     onError: (error) => {
@@ -69,6 +71,12 @@ const Login = () => {
     },
   });
 
+  const handleLoginInfo = async (res)=>{
+      const data = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${res}`);
+      const json = await (data.json());
+      setUserInfo(json);
+      localStorage.setItem('userInfo',JSON.stringify(json));
+  }
 
 return (
     <>

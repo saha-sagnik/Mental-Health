@@ -23,7 +23,7 @@ const Services = () => {
   
       return cardData.map((card) => (
         <Link key={card.id} to={card.linkTo}
-          className={`w-full flex-col items-center gap-4 max-w-sm h-[55vh] border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-${card.color}`}
+          className={`w-full flex-col items-center gap-4 max-w-sm h-[55vh] border border-gray-200 rounded-lg shadow bg-${card.color}`}
           id={`card-${card.id}`}
           onMouseEnter={() => setCardActive(card.id)}
           onMouseLeave={() => setCardActive(null)}
@@ -35,7 +35,7 @@ const Services = () => {
           <div className='flex items-center justify-center text-md'>
             {card.text3} <i className="ri-arrow-drop-right-line"></i>
         </div>
-        {cardActive === card.id ? <img className='rounded-t-lg flex justify-center h-[15vw] ml-[2vw] transition-all duration-500' src={card.image1} alt={card.title} /> : <img className='rounded-t-lg flex justify-center h-[15vw] ml-[2vw] transition-all duration-300' src={card.image2} alt={card.title} />}
+        {cardActive === card.id ? <img className='items-center rounded-t-lg flex justify-center h-[15vw] ml-[2vw] transition-all duration-500' src={card.image1} alt={card.title} /> : <img className='rounded-t-lg flex justify-center h-[15vw] ml-[2vw] transition-all duration-300' src={card.image2} alt={card.title} />}
         </Link>
       ));
     };
@@ -47,7 +47,7 @@ const Services = () => {
           stay ready for tomorrow
         </div>
         <div className='flex items-center justify-center text-3xl font-bold pb-8 text text-gray-700'>What type of Mental Health Support do you Need?</div>
-        <div className='flex gap-6'>{renderCard()}</div>
+        <div className='flex flex-col xl:flex-row xl:gap-6'>{renderCard()}</div>
       </div>
     );
   };
