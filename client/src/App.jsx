@@ -18,6 +18,7 @@ import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
 import Dashboard from "./components/Dashboard";
 import LoggedIn from "./components/LoggedIn";
+import Consult from "./components/Consult";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -60,6 +61,9 @@ const appRouter = createBrowserRouter([
         element: <Dashboard/>
       }
     ]
+  },{
+      path: 'consult',
+      element:<Consult/>
   },
   {
     path:'loggedin',

@@ -1,5 +1,4 @@
 [
-    ["Anxiety Disorders","Depression","Schizophrenia"],
-    ["OCD","Bipolar Disorder","PTSD"],
-    ["Eating Disorders","Substance Use Disorders","ADHD"]
+    ["Anxiety Disorders","Depression","Schizophrenia","OCD","Bipolar Disorder","PTSD",
+    "Eating Disorders","Substance Use","ADHD"]
 ]
