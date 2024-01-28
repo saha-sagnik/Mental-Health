@@ -1,72 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, json, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import 'flowbite';
 import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
-import woman from '../assets/login-pic.jpg';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
-import { setName } from '../store/InfoSlice.js';
-import { setToken } from '../store/InfoSlice.js';
-import { setUserInfo } from '../store/InfoSlice.js';
+import  {addUser}  from '../store/InfoSlice';
+
 // Login.jsx
 const Login = () => {
+  const navigate = useNavigate();
+  const status = useSelector(Store=>Store.info.loggedIn);
+  if(status){
+    navigate('/');
+  }
+  const dispatch = useDispatch();
+
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-  const navigate = useNavigate();
 
-  // Define the function to check authentication status
-  const checkAuthStatus = async () => {
-    try {
-      const response = await axios.get('http://localhost:5001/user');
-      if (response.data.user) {
-        navigate('/dashboard');
-      }
-    } catch (error) {
-      console.error('Error checking authentication status:', error);
-    }
-  };
+  const handleUser =async (access_token)=>{
+    const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
+    const json = await data.json();
+    dispatch(addUser(json));
+    console.log("added user",json);
+  }
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  // Define the function to handle form submission
   const submit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('http://localhost:5001/', {
-        mail,
-        pass,
-      });
-
-      if (response.data === 'fail') {
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 4000);
-      } else {
-        navigate('/');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
   };
 
-  // Initialize Google login
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      console.log('Google login success:');
-      handleLoginInfo(codeResponse.access_token);
-
-      navigate('/loggedin');
-
+      handleUser(codeResponse.access_token)
     },
     onError: (error) => {
-      // Handle Google login error
       console.log('Google login failed:', error);
     },
   });
@@ -147,7 +118,7 @@ return (
                   }}
                 >
                   <img className='pl-10 w-16' src={google} />
-                  <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
+                  <h1 className='dark:text-gray-400 p-3 text-sm hover:text-white hover:cursor-pointer transition duration-300 ease-in-out'>Sign in with Google</h1>
                 </div>
 
               <div class="flex items-center justify-between">

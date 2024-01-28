@@ -1,8 +1,9 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const Auth = require('./models/authentication.js');
+const User = require('./models/user.js');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr(process.env.CRYPTR_SECRET_KEY);
 
@@ -14,20 +15,18 @@ passport.use(new GoogleStrategy({
   async function(accessToken, refreshToken, profile, done) {
     console.log("Google Authentication Profile:", profile);
     const newUser = {
-      googleId: profile.id,
-      displayName: profile.displayName,
-      firstName: profile.name.givenName,
-      lastName: profile.name.familyName,
-      profileImage: profile.photos[0].value
+      userID: profile.id,
+      name: profile.displayName,
+      photo: profile.photos[0].value,
   };
 
     try{
-        let user = await Auth.findOne({googleId: profile.id});
+        let user = await User.findOne({userID: profile.id});
         if(user)
         done(null,user);
         else{
-        newUser.firstName = cryptr.encrypt(newUser.firstName);  
-        user = await Auth.create(newUser);
+        newUser.name = cryptr.encrypt(newUser.name);  
+        user = await User.create(newUser);
         done(null,user);
         }
     }
@@ -37,14 +36,10 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.get('/google',
+router.get('/auth/google',
   passport.authenticate('google', { scope: ['email','profile'] }));
-router.get('/google/callback', 
+router.get('/auth/google/callback', 
   passport.authenticate('google',{successRedirect: '/', failureRedirect: '/login-failure'}),
-  (req, res) => {
-    // If authentication is successful, this callback will be executed
-    window.location('http://localhost:5173/');
-  }
 );
 
 router.get('/login-failure',(req,res)=>{
@@ -71,7 +66,7 @@ passport.serializeUser(function(user,done){
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await Auth.findById(id);
+    const user = await User.findById(id);
     done(null, user);
   } catch (err) {
     done(err, null);

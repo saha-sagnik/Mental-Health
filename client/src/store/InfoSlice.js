@@ -4,11 +4,8 @@ const infoSlice = createSlice({
     name:'cart',
     initialState:{
         info:[],
-        loggedIn:true,
-        name:"",
-        token:"",
-        user:null,
-        userInfo:null
+        loggedIn:false,
+        user:null
     },
     reducers: {
         addItem: (state,action)=>{
@@ -20,18 +17,17 @@ const infoSlice = createSlice({
         setItem:(state,action)=>{
             state.info = action.payload;
         },
-        setName:(state,action)=>{
-            state.name=action.payload;
+        addUser:(state,action)=>{
+            state.user = action.payload;
+            state.loggedIn = true;
         },
-        setToken:(state,action)=>{
-            state.name=action.payload ;
-        },
-        setUserInfo:(state,action)=>{
-            state.name = action.payload
+        removeUser:()=>{
+            state.user = null;
+            state.loggedIn = false;
         }
     }
 });
 
-export const {addItem,setItem,cleatCart,setName,setToken,setUserInfo} = infoSlice.actions;
+export const {addItem,setItem,cleatCart, removeUser,addUser} = infoSlice.actions;
 
 export default infoSlice.reducer;
