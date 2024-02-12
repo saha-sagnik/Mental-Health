@@ -2,7 +2,8 @@ import React from 'react';
 import hero from '../assets/homepage-hero-image-web-v1.png';
 import doctorItems from '../constants/doctor.json'
 import { Link } from 'react-router-dom';
-import 'boxicons';
+import 'boxicons'; 
+import DoctorCard from './DoctorCard';
 
 
 const generateImages = (count) => {
@@ -11,9 +12,10 @@ const generateImages = (count) => {
     for (let i = 0; i < count; i++) {
         images.push(
             <div key={i} className="flex-shrink-0 w-14 h-14 rounded-full overflow-hidden inline-block text-gray-500 border-3 border-white relative pointer-events-none">
-                <img src={doctorItems.img || hero} alt={`Image ${i + 1}`} />
+                <img src={doctorItems[i].img || hero} alt={`Image ${i + 1}`} />
             </div>
         );
+        
     }
 
     return images;
@@ -21,6 +23,7 @@ const generateImages = (count) => {
 
 const Consult = () => {
     return (
+        <>
         <section className='bg-[#f8e9e6]'>
             <div className='grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12'>
                 <div className="mr-auto place-self-center lg:col-span-7">
@@ -49,11 +52,27 @@ const Consult = () => {
                     
                     </div>
                 </div>
-                <div className="hidden w-[650px] lg:flex">
+                <div className="hidden w-[600px] h-[300px] lg:flex">
                     <img className='' src={hero} alt="mockup" />
                 </div>
             </div>
         </section>
+        {/* Our Doctors section */}
+        <div className='p-4 text-3xl'>
+            <h1 className='font-semibold text-md'>Our Doctors</h1>
+            <div className='grid grid-cols-3 h-full'>
+            {doctorItems.map((doctor, index) => (
+                <DoctorCard
+                    key={index}
+                    name={doctor.name}
+                    position={doctor.position}
+                    imageUrl={doctor.img}
+                    specialized={[doctor.specialised]}
+                />
+            ))}
+        </div>
+        </div>
+        </>
     );
 }
 

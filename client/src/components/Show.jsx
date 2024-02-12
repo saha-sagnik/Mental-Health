@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addResult } from "../store/ResultSlice";
 
 
@@ -9,6 +9,7 @@ const Show = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(Store=>Store.info.user);
+    const navigate = useNavigate();
     useEffect(()=>{
       if(user===null){
         navigate('/login');

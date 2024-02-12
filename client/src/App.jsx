@@ -19,6 +19,8 @@ import Show from "./components/Show";
 import Dashboard from "./components/Dashboard";
 import LoggedIn from "./components/LoggedIn";
 import Consult from "./components/Consult";
+import User from "./components/User";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -69,6 +71,11 @@ const appRouter = createBrowserRouter([
     path:'loggedin',
     element:< LoggedIn />
   },
+  {
+path: 'user',
+element: <User/>
+  },
+  
   {
     path:'/login',
     element:<Provider store={Store}><GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 
@@ -8,11 +8,25 @@ import RightSide from './RightSide';
 const Dashboard = () => {
     const Result = useSelector(store=>store.result);
     const user = useSelector(Store=>Store.info.user);
+    const navigate = useNavigate();
     useEffect(()=>{
+        console.log("Redux State:", Store);
       if(user===null){
+        console.error("User is null. Redirecting to login.");
         navigate('/login');
       }
-    },[])
+    },[navigate,user]);
+
+    useEffect(() => {
+        if (user) {
+            console.log("User:", user);
+        } else {
+            console.warn("User is null.");
+        }
+    }, [user]);
+
+
+
     return (
         <>
             <div className="bg-blue-300 flex justify-between">
