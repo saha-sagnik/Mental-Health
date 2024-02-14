@@ -10,8 +10,8 @@ const LeftSide = () => {
 
         return items.map((item, index) => (
             <li key={index} className="items-center py-3">
-                <span>{item.label}</span><br />
-                <span className="ml-auto">{item.value}</span>
+                <span>{item?.label}</span><br />
+                <span className="ml-auto">{item?.value}</span>
             </li>
         ));
     };
