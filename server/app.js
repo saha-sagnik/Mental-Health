@@ -38,6 +38,10 @@ app.get('/',cors(),(req,res)=>{
 
 //gpt();
 
+app.post("/signup",cors(),(req,res)=>{
+  console.log(req.body);
+})
+
 
 app.post('/info',async (req,res)=>{
   console.log("This is the info that is coming from /info route: ",req.body.info);

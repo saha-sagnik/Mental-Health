@@ -1,6 +1,6 @@
 import React from 'react'
 import 'flowbite'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
 import { useDispatch, useSelector } from 'react-redux'
 import { removeUser } from '../store/InfoSlice'
@@ -36,7 +36,7 @@ const Navbar = () => {
         {
           user?<>
               <div>
-                <h1 className='flex font-medium items-start text-xl px-4 py-2' >{user.name}</h1>
+                <NavLink to="/user" className='flex font-medium items-start text-xl px-4 py-2' >{user.name}</NavLink>
               </div>
               <Link to="/login">
               <button
