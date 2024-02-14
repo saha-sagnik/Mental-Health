@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import 
+import React, {useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import { Link,useNavigate } from 'react-router-dom';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 
@@ -10,10 +10,12 @@ const Dashboard = () => {
     const user = useSelector(Store=>Store.info.user);
     const navigate = useNavigate();
     useEffect(()=>{
+        console.log("Redux State:", Store);
       if(user===null){
+        console.error("User is null. Redirecting to login.");
         navigate('/login');
       }
-    },[user,navigate])
+    },[])
     return (
         <>
         <div className='container'>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import woman from '../assets/login-pic.jpg';
+import woman1 from '../assets/login-pic.jpg';
+import woman2 from '../assets/pexels-emmy-e-2381069.jpg';
+import woman3 from '../assets/pexels-andrea-piacquadio-774909.jpg';
+import woman4 from '../assets/pexels-guilherme-almeida-1858175.jpg';
 import { Link } from 'react-router-dom';
 import { useTypewriter } from 'react-simple-typewriter';
 
 const Hero = () => {
-   
     const word = useTypewriter({
         words: ['Panic Attacks', 'OCD', 'Bipolar Disorder', 'PTSD', 'Suicidal Tendencies', 'more'],
         loop: {}
@@ -21,8 +23,11 @@ const Hero = () => {
                         <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                     </Link>
                 </div>
-                <div className="hidden lg:mt-0 lg:col-span-4 lg:flex ml-[3vw]">
-                    <img src={woman} alt="mockup" />
+                <div className="hidden lg:mt-0 lg:col-span-4 lg:flex ml-[3vw]" id="images">
+                    <img src={woman1} alt="mockup" />
+                    {/* <img src={woman2} alt="image1" />
+                    <img src={woman3} alt="image2" />
+                    <img src={woman4} alt="image3" /> */}
                 </div>
             </div>
         </section>

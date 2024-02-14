@@ -17,6 +17,12 @@ import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
 import Dashboard from "./components/Dashboard";
+import LoggedIn from "./components/LoggedIn";
+import Consult from "./components/Consult";
+import User from "./components/User";
+import PdfDownload from "./components/pdftest/PdfDownload";
+import FurtherQuestions from "./components/FurtherQuestions";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -58,8 +64,24 @@ const appRouter = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard/>
       },
+      {
+        path:'/furtherquestions',
+        element:<FurtherQuestions />
+      }
     ]
+  },{
+      path: 'consult',
+      element:<Consult/>
   },
+  {
+    path:'loggedin',
+    element:< LoggedIn />
+  },
+  {
+path: 'user',
+element: <User/>
+  },
+  
   {
     path:'/login',
     element:<Provider store={Store}><GoogleOAuthProvider clientId="452856652804-fl5htt0506fjktjs8aashorq3vjfgj60.apps.googleusercontent.com">
@@ -73,6 +95,10 @@ const appRouter = createBrowserRouter([
               <SignUp />
             </GoogleOAuthProvider>
   },
+  {
+    path:'/pdf',
+    element:<PdfDownload />
+  }
 ])
 
 root.render(<RouterProvider router={appRouter} />) ;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addResult } from "../store/ResultSlice";
 
 
@@ -9,6 +9,7 @@ const Show = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(Store=>Store.info.user);
+    const navigate = useNavigate();
     useEffect(()=>{
       if(user===null){
         navigate('/login');
@@ -64,8 +65,8 @@ const Show = () => {
                 })
             }
             <div className="flex items-center justify-center py-4">
-                <Link to='/dashboard' className="bg-blue-500 p-4 pt-2 rounded-md h-10 text-white hover:bg-blue-700">
-                    Submit
+                <Link to='/furtherquestions' className="bg-blue-500 p-4 pt-2 rounded-md h-10 text-white hover:bg-blue-700">
+                    Further Questions
                 </Link>
             </div>
 

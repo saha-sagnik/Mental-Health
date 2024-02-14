@@ -351,5 +351,50 @@ card3: [
       question: "Do you have specific concerns or topics you find challenging to discuss with others?",
       options: ["Yes", "No", "Sometimes"]
     }
-  ]
+  ],
+
+  commoncard:[
+    {
+        "Question": "Have there been any recent significant changes or stressors in your life?",
+        "Type": "Open-ended",
+        "answer":""
+    },
+    {
+        "Question": "Have you experienced any significant medical events or illnesses recently?",
+        "Type": "Yes/No",
+        "answer":""
+    },
+    {
+        "Question": "Have you ever been diagnosed with a mental health condition before?",
+        "Type": "Yes/No",
+        "yes":"What mental health condition your are diagnosed?",
+        "answer1":"",
+        "answer2":""
+    },
+    {
+        "Question": "Have you experienced any significant mental health symptoms or episodes in the past?",
+        "Type": "Yes/No",
+        "yes":"Brief about the symptoms or the episodes",
+        "answer1":"",
+        "answer2":""
+    },
+    {
+        "Question": "Have you ever received treatment for mental health concerns, such as therapy or medication?",
+        "Type": "Yes/No",
+        "answer":""
+    },
+    {
+        "Question": "Can you tell me about any mental health conditions that run in your family?",
+        "Type": "Open-ended",
+        "answer":""
+    },
+    {
+        "Question": "Have any of your close family members, such as parents or siblings, been diagnosed with mental health disorders?",
+        "Type": "Yes/No",
+        "yes":"Brief about them",
+        "answer1":"",
+        "answer2":""
+    }
+]
+
 };
