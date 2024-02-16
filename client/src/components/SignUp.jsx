@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import google from '../assets/google.png'
 import logo from '../assets/mindharbor-logo-removebg-preview1.png'
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { auth } from '../constants/firebase';
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
+
+  const navigate = useNavigate();
 
   const [signupdata,setSignupdata] = useState(false);
   const [fname,setFname] = useState(null);
   const [lname,setLname] = useState(null)
   const [mail,setMail] = useState(null);
   const [password,setPassword] = useState();
+  const [next,setNext] = useState(false);
+  const [gender,setGender] = useState(null);
+  const [age,setAge] = useState(null);
 
   const handleUser =async (access_token)=>{
     const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
@@ -25,14 +32,42 @@ const SignUp = () => {
     console.log("added user",json);
   }
 
-  const handleSignup =async ()=>{
-    const response = await axios.post("http://localhost:5001/signup",{
-      test:1,
-      Firstname:fname,
-      Lastname:lname,
-      mail:mail,
-      password:password
-    })
+  const handleNext = ()=>{
+    if(mail && password && fname && lname){
+      if(password.length >= 8){
+        setNext(true);
+        return ;
+      }
+      else
+        alert('password too small');
+    }
+    else{
+      alert("fill all the details");
+    }
+  }
+
+  const handleSignup = ()=>{
+    // const response = await axios.post("http://localhost:5001/signup",{
+    //   test:1,
+    //   Firstname:fname,
+    //   Lastname:lname,
+    //   mail:mail,
+    //   password:password
+    // })
+    createUserWithEmailAndPassword(auth, mail, password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert("Email already Registered");
+    navigate('/login');
+    // ..
+  });
+
   }
 
   const login = useGoogleLogin({
@@ -43,7 +78,6 @@ const SignUp = () => {
       console.log('Google login failed:', error);
     },
   });
-
   return (
     <>
    
@@ -62,7 +96,7 @@ const SignUp = () => {
           </h1>
           <p className='text-xs font-light text-gray-500 dark:text-gray-400'>Embracing Hope. Already have an account? <NavLink to='/login' className='font-medium text-blue-600 hover:underline dark:text-orange-500'>Sign In.</NavLink> </p>
           <form className='space-y-4 md:space-y-6' action="">
-            <div className='grid gap-4 grid-cols-2 grid-rows-2'>
+            {!next? <div className='grid gap-4 grid-cols-2 grid-rows-2'>
               <div>
                 <label for="name" class="block mb-2 text-sm font-medium dark:text-white">First Name</label>
                 <input value={fname} 
@@ -106,6 +140,46 @@ const SignUp = () => {
                 required="" />
               </div>
             </div>
+            :
+            <div className='grid gap-4 grid-cols-2 grid-rows-2'>
+              <div>
+                <label for="name" class="block mb-2 text-sm font-medium dark:text-white">Age</label>
+                <input 
+                onChange={(e)=>{
+                  setAge(e.target.value);
+                }}
+                type="text" name="text" id="name" 
+                class="bg-gray-50  pr-10 border border-gray-3 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="first name" required="" />
+              </div>
+              <div>
+                <label for="name" class="block mb-2 text-sm font-medium  dark:text-white">Gender</label>
+                <select 
+                className={`rounded-md text-gray-600 ${gender? 'text-black' : "text-gray-600"  }`}
+                onChange={(e)=>{
+                  setGender(e.target.value);
+                }}
+                >
+                  <option className='hidden' selected>Select a gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Trans</option>
+                  <option>Prefer Not To Say</option>
+                </select>
+              </div>
+                
+              <div>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <input value={mail}
+                onChange={(e)=>{
+                  setMail(e.target.value);
+                }}
+                type="email" name="email" id="email" 
+                class="bg-gray-50  pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="yourmail@mail.com" required="" />
+              </div>
+            </div>
+            }
           </form>
           <div
             class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-500 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-500">
@@ -132,6 +206,16 @@ const SignUp = () => {
             </div>
             
           </div>
+          {!next?<button
+          onClick={(e)=>{
+            e.preventDefault();
+            // handleSignup();
+            const res = handleNext();
+            if(res) setNext(true);
+          }}
+          class="w-full text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Next</button>
+          :
           <button
           onClick={(e)=>{
             e.preventDefault();
@@ -139,6 +223,7 @@ const SignUp = () => {
           }}
           class="w-full text-white bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Sign Up</button>
+          }
           <p class="text-sm font-light text-gray-500 dark:text-gray-400"></p>
         </div>
       </div>
