@@ -21,7 +21,7 @@ const infoSlice = createSlice({
             state.user = action.payload;
             state.loggedIn = true;
         },
-        removeUser:()=>{
+        removeUser:(state,action)=>{
             state.user = null;
             state.loggedIn = false;
         }

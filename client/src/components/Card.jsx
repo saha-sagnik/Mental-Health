@@ -48,7 +48,7 @@ function Quiz() {
 
   const navigateToShow = ()=>{
     setTimeout(()=>{
-        navigate('/show');
+        navigate('/furtherquetions');
     },2000)
   }
 

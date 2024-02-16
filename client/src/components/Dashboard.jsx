@@ -10,7 +10,6 @@ const Dashboard = () => {
     const user = useSelector(Store=>Store.info.user);
     const navigate = useNavigate();
     useEffect(()=>{
-        console.log("Redux State:", Store);
       if(user===null){
         console.error("User is null. Redirecting to login.");
         navigate('/login');
