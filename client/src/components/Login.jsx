@@ -59,6 +59,13 @@ const Login = () => {
     },
   });
 
+  const sendLogInfo =async (data)=>{
+      const res = await axios.post('http://localhost:3000/post-login',{
+        data
+      });
+      console.log(res?.data);
+  }
+
   const firebaseLogin = ()=>{
     signInWithPopup(auth, provider)
   .then((result) => {
@@ -68,6 +75,7 @@ const Login = () => {
     // The signed-in user info.
     const user = result.user;
     console.log("user",user,"token",token);
+    sendLogInfo(user?.providerData[0]);
     if(user){
       dispatch(addUser(user?.providerData[0]));
       navigate('/')
