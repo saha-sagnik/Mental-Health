@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'flowbite'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import navitems from "../constants/navitems.json"
 import { useDispatch, useSelector } from 'react-redux'
-import { removeUser } from '../store/InfoSlice'
+import { addUser, removeUser } from '../store/InfoSlice'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
+import { auth } from '../constants/firebase'
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(Store=>Store.info.user);
+
+  useEffect(()=>{
+    const subscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(addUser(user?.providerData[0]));
+          // ...
+        } else {
+          // User is signed out
+          navigate('/login');
+        }
+      });
+
+      return()=> subscribe();
+},[]);
+
+const handleSignOut = ()=>{
+    signOut(auth).then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
+}
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -36,11 +61,12 @@ const Navbar = () => {
         {
           user?<>
               <div>
-                <NavLink to="/user" className='flex font-medium items-start text-xl px-4 py-2' >{user.name}</NavLink>
+                <NavLink to="/user" className='flex font-medium items-start text-xl px-4 py-2' >{user.name || user.displayName}</NavLink>
               </div>
               <Link to="/login">
               <button
                 onClick={()=>{
+                  handleSignOut();
                   dispatch(removeUser());
                   navigate('/login')
                 }}

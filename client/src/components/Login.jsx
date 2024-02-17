@@ -9,14 +9,31 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import  {addUser}  from '../store/InfoSlice';
 
+import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../constants/firebase';
+
 // Login.jsx
 const Login = () => {
-  const navigate = useNavigate();
-  const status = useSelector(Store=>Store.info.loggedIn);
-  if(status){
-    navigate('/');
-  }
+
+  const provider = new GoogleAuthProvider();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const status = useSelector(Store=>Store.info.loggedIn);
+  useEffect(()=>{
+    const subscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          dispatch(addUser(user?.providerData[0]));
+          // ...
+          navigate('/')
+        } else {
+          // User is signed out
+          navigate('/login');
+        }
+      });
+
+      return()=> subscribe();
+},[]);
 
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
@@ -41,6 +58,41 @@ const Login = () => {
       console.log('Google login failed:', error);
     },
   });
+
+  const sendLogInfo =async (data)=>{
+      const res = await axios.post('http://localhost:3000/post-login',{
+        data
+      });
+      console.log(res?.data);
+  }
+
+  const firebaseLogin = ()=>{
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    console.log("user",user,"token",token);
+    sendLogInfo(user?.providerData[0]);
+    if(user){
+      dispatch(addUser(user?.providerData[0]));
+      navigate('/')
+    }
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+  });
+  }
 
   const handleLoginInfo = async (res)=>{
       const data = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${res}`);
@@ -114,7 +166,8 @@ return (
               </div>
                 <div className='w-full flex items-center justify-center gap-0 bg-white rounded-lg shadow hover:bg-blue-300 cursor-pointer transition duration-300 ease-in-out dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'
                   onClick={()=>{
-                    login();
+                    // login();
+                    firebaseLogin();
                   }}
                 >
                   <img className='pl-10 w-16' src={google} />

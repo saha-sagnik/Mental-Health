@@ -16,7 +16,8 @@ import Card from "./components/Card";
 import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
-import Dash from "./dashboard/Dash.jsx";
+import Dash from "./components/Dashboard/Dash";
+import Dashboard from "./components/dashboard/Dashboard";
 import LoggedIn from "./components/LoggedIn";
 import Consult from "./components/Consult";
 import User from "./components/User";
@@ -35,7 +36,7 @@ const AppLayout = ()=>{
   // }
   return (
     <Provider store={Store}>
-      <Help/>
+      {window.location.pathname !== '/dashboard' && <Help />}
       <Navbar />
       <Outlet />
       <Footer />
