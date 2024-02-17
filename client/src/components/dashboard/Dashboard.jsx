@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom';
 import LeftSide from '../LeftSide';
 import RightSide from '../RightSide';
-import flowbite from 'flowbite'
+import 'flowbite';
 
 
 const Dashboard = () => {
     <>
-      <div class="px-4 pt-6 2xl:px-0">
+      <div class="px-4 pt-6">
     <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-3">
       
       <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -27,11 +27,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div id="main-chart"></div>
-        
+       
         <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
           <div>
             <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" type="button" data-dropdown-toggle="weekly-sales-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-           
+            
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="weekly-sales-dropdown">
                 <div class="px-4 py-3" role="none">
                   <p class="text-sm font-medium text-gray-900 truncate dark:text-white" role="none">
@@ -268,8 +268,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </li>
-                <li>
-                <div class="py-3 sm:py-4">
+                <li class="py-3 sm:py-4">
                   <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
                       <img class="w-8 h-8 rounded-full" src="/images/users/thomas-lean.png" alt="Neil image"/>
@@ -282,7 +281,7 @@ const Dashboard = () => {
                         email@flowbite.com
                       </p>
                     </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"/>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                       $1842
                     </div>
                   </div>
@@ -308,7 +307,7 @@ const Dashboard = () => {
               </ul>
             </div>
         </div>
-       
+        
         <div class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
           <div>
             <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" type="button" data-dropdown-toggle="stats-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
@@ -389,19 +388,19 @@ const Dashboard = () => {
           <div class="flex items-center mb-2">
             <div class="w-16 text-sm font-medium dark:text-white">50+</div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style="width: 18%"></div>
+              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style={{width: '18%'}}></div>
             </div>
           </div>
           <div class="flex items-center mb-2">
             <div class="w-16 text-sm font-medium dark:text-white">40+</div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style="width: 15%"></div>
+              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style={{width: '15%'}}></div>
             </div>
           </div>
           <div class="flex items-center mb-2">
             <div class="w-16 text-sm font-medium dark:text-white">30+</div>
             <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style="width: 60%"></div>
+              <div class="bg-primary-600 h-2.5 rounded-full dark:bg-primary-500" style={{width: '60%'}}></div>
             </div>
           </div>
           <div class="flex items-center mb-2">
@@ -422,7 +421,7 @@ const Dashboard = () => {
             View all
           </a>
         </div>
-        
+       
         <form class="overflow-y-auto lg:max-h-[60rem] 2xl:max-h-fit">
           <article class="mb-5">
             <footer class="flex items-center justify-between mb-2">
@@ -439,7 +438,7 @@ const Dashboard = () => {
                     </svg>
                     <span class="sr-only">Comment settings</span>
                 </button>
-               
+                
                 <div id="dropdownComment1" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36 dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                         <li>
@@ -558,7 +557,7 @@ const Dashboard = () => {
                     </svg>
                     <span class="sr-only">Comment settings</span>
                 </button>
-               
+                
                 <div id="dropdownComment3" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36 dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                         <li>
@@ -645,7 +644,7 @@ const Dashboard = () => {
                     </svg>
                     <span class="sr-only">Comment settings</span>
                 </button>
-              
+                
                 <div id="dropdownComment4" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36 dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownMenuIconHorizontalButton">
@@ -677,7 +676,7 @@ const Dashboard = () => {
                     </svg>
                     <span class="sr-only">Comment settings</span>
                 </button>
-               
+                
                 <div id="dropdownComment5" class="z-10 hidden bg-white divide-y divide-gray-100 rounded shadow w-36 dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
                         <li>
@@ -780,7 +779,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div class="w-full" id="sales-by-category"></div>
-         
+          
           <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
             <div>
               <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" type="button" data-dropdown-toggle="sales-by-category-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
@@ -822,7 +821,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-          <div class="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
             <div>
               <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Traffic by device</h3>
               <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">Desktop</span>
@@ -833,7 +832,7 @@ const Dashboard = () => {
             </a>
           </div>
           <div id="traffic-by-device"></div>
-         
+          
           <div class="flex items-center justify-between pt-4 lg:justify-evenly sm:pt-6">
             <div>
               <svg class="w-8 h-8 mb-1 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -932,7 +931,7 @@ const Dashboard = () => {
           </li>
         </ol>
       </div>
-      
+     
       <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
         <div id="carousel" class="relative" data-carousel="">
           <div class="relative mx-auto overflow-hidden h-[36rem] lg:h-[24rem]">
@@ -971,42 +970,42 @@ const Dashboard = () => {
                 <p class="mb-4 text-lg font-medium text-gray-900 dark:text-white">What you'll learn:</p>
                 <ul role="list" class="pl-2 mb-4 space-y-3 text-gray-500 list-disc dark:text-gray-400">
                   <li class="flex space-x-2">
-                      
+                     
                       <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                       </svg>
                       <span class="leading-tight">Dynamic reports and dashboards</span>
                   </li>
                   <li class="flex space-x-2">
-                      
+                     
                       <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                       </svg>
                       <span class="leading-tight">Learn from competitors about what to do, and not to do</span>
                   </li>
                   <li class="flex space-x-2">
-                      
+                     
                       <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                       </svg>
                       <span class="leading-tight">Take their business to the next level</span>
                   </li>
                   <li class="flex space-x-2">
-                      
+                     
                       <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                       </svg>
                       <span class="leading-tight">Limitless business automation</span>
                   </li>
                   <li class="flex space-x-2">
-                      
+                     
                       <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                       </svg>
                       <span class="leading-tight">Build relationships with other businesses to co-promote</span>
                   </li>
                   <li class="flex space-x-2">
-                    
+                   
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                       <path clip-rule="evenodd" fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"></path>
                     </svg>
@@ -1032,22 +1031,22 @@ const Dashboard = () => {
                
                 <ul role="list" class="pl-2 my-5 mb-4 space-y-3 text-gray-500 list-disc dark:text-gray-400">
                     <li class="flex space-x-3">
-                        
+                       
                         <svg class="flex-shrink-0 w-5 h-5 text-purple-600 dark:text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                         <span class="leading-tight">Dynamic reports and dashboards</span>
                     </li>
                     <li class="flex space-x-3">
-                        
+                       
                         <svg class="flex-shrink-0 w-5 h-5 text-purple-600 dark:text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                         <span class="leading-tight">Templates for everyone</span>
                     </li>
                     <li class="flex space-x-3">
-                        
+                       
                         <svg class="flex-shrink-0 w-5 h-5 text-purple-600 dark:text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                         <span class="leading-tight">Development workflow</span>
                     </li>
                     <li class="flex space-x-3">
-                        
+                       
                         <svg class="flex-shrink-0 w-5 h-5 text-purple-600 dark:text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                         <span class="leading-tight">Limitless business automation</span>
                     </li>
@@ -1078,7 +1077,7 @@ const Dashboard = () => {
       </div>
     </div>
     <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    
+     
       <div class="items-center justify-between lg:flex">
         <div class="mb-4 lg:mb-0">
           <h3 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Transactions</h3>
@@ -1095,7 +1094,7 @@ const Dashboard = () => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
               </svg>
             </button>
-          
+            
             <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
               <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                 Category
@@ -1157,7 +1156,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-     
+      
       <div class="flex flex-col mt-6">
         <div class="overflow-x-auto rounded-lg">
           <div class="inline-block min-w-full align-middle">
@@ -1409,7 +1408,7 @@ const Dashboard = () => {
       <div class="flex items-center justify-between pt-3 sm:pt-6">
         <div>
           <button class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:text-gray-900 dark:text-gray-400 dark:hover:text-white" type="button" data-dropdown-toggle="transactions-dropdown">Last 7 days <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-         
+          
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="transactions-dropdown">
               <div class="px-4 py-3" role="none">
                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white" role="none">
