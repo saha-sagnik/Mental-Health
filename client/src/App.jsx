@@ -17,6 +17,7 @@ import Store from '../src/store/Store'
 import { Provider, useSelector } from 'react-redux';
 import Show from "./components/Show";
 import Dash from "./components/Dashboard/Dash";
+import Dashboard from "./components/dashboard/Dashboard";
 import LoggedIn from "./components/LoggedIn";
 import Consult from "./components/Consult";
 import User from "./components/User";
