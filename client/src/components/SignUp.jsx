@@ -104,8 +104,8 @@ const SignUp = () => {
                   setFname(e.target.value);
                 }}
                 type="text" name="text" id="name" 
-                class="bg-gray-50  pr-10 border border-gray-3 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="first name" required="" />
+                class="bg-gray-50 pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Jane" required="" />
               </div>
               <div>
                 <label for="name" class="block mb-2 text-sm font-medium  dark:text-white">Last Name</label>
@@ -115,7 +115,7 @@ const SignUp = () => {
                 }}
                 type="name" name="name" 
                 id="name" class="bg-gray-50  pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="last name" required="" />
+                placeholder="Doe" required="" />
               </div>
               
               <div>
@@ -126,7 +126,7 @@ const SignUp = () => {
                 }}
                 type="email" name="email" id="email" 
                 class="bg-gray-50  pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="yourmail@mail.com" required="" />
+                placeholder="username@mail.com" required="" />
               </div>
               <div>
                 <label for="password" class="block mb-2 text-sm font-medium dark:text-white">Password</label>

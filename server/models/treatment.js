@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const treatmentSchema = new Schema({
     userID:{
         type: Schema.Types.ObjectId,
-        ref: "Auth",
+        ref: "User",
         required: true,
     },
     doctorID: {
