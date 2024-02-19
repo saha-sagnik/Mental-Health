@@ -48,6 +48,20 @@ const Login = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    const response = await axios.post('http://localhost:3000/login',{
+      mail:mail,
+      password:pass
+    });
+    if(response.data?.loggedin){
+      dispatch(addUser(response?.data?.user))
+      navigate('/');
+    }
+    else if(!response.data?.exists){
+      navigate('/signup');
+    }
+    else{
+      alert('Try again later');
+    }
   };
 
   const login = useGoogleLogin({
