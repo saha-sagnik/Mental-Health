@@ -77,6 +77,6 @@ app.post('/info',async (req,res)=>{
   
 });
 
-app.listen(5001,()=>{
-    console.log("Server running at port 5001");
+app.listen(3000,()=>{
+    console.log("Server running at port 3000");
 })
