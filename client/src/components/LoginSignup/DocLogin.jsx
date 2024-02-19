@@ -5,133 +5,69 @@ import axios from 'axios';
 import 'flowbite';
 import logo from '../assets/mindharbor-logo-removebg-preview1.png';
 import google from '../assets/google.png';
-import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
-import  {addUser}  from '../store/InfoSlice';
 
 import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
-import { auth } from '../constants/firebase';
+import { auth } from '../../constants/firebase';
 
-// Login.jsx
-const Login = () => {
+const DocLogin = () => {
 
-  const provider = new GoogleAuthProvider();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+    const provider = new GoogleAuthProvider();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  const status = useSelector(Store=>Store.info.loggedIn);
-  useEffect(()=>{
-    const subscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          dispatch(addUser(user?.providerData[0]));
-          // ...
+    const [mail, setMail] = useState('');
+    const [pass, setPass] = useState('');
+
+    useEffect(()=>{
+        const subscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log(user);
+              // ...
+              navigate('/')
+            }
+          });
+    
+          return()=> subscribe();
+    },[]);
+
+    const sendLogInfo =async (data)=>{
+        const res = await axios.post('http://localhost:3000/doc-login',{
+          data
+        });
+        return res?.data?.exists;
+    }
+
+
+    const firebaseLogin = ()=>{
+        signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log("user",user,"token",token);
+        sendLogInfo(user?.providerData[0]);
+        if(user){
           navigate('/')
-        } else {
-          // User is signed out
-          navigate('/login');
         }
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
       });
-
-      return()=> subscribe();
-},[]);
-
-  const [mail, setMail] = useState('');
-  const [pass, setPass] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
-
-  const handleUser =async (access_token)=>{
-    const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
-    const json = await data.json();
-    dispatch(addUser(json));
-    console.log("added user",json);
-  }
-
-  const submit = async (e) => {
-    e.preventDefault();
-    const response = await axios.post('http://localhost:3000/login',{
-      mail:mail,
-      password:pass
-    });
-    if(response.data?.loggedin){
-      dispatch(addUser(response?.data?.user));
-      navigate('/');
-    }
-    else if(!response.data?.exists){
-      navigate('/signup');
-    }
-    else{
-      alert('Try again later');
-    }
-  };
-
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      handleUser(codeResponse.access_token)
-    },
-    onError: (error) => {
-      console.log('Google login failed:', error);
-    },
-  });
-
-  const sendLogInfo =async (data)=>{
-      const res = await axios.post('http://localhost:3000/post-login',{
-        data
-      });
-      console.log(res?.data);
-  }
-
-  const firebaseLogin = ()=>{
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log("user",user,"token",token);
-    sendLogInfo(user?.providerData[0]);
-    if(user){
-      dispatch(addUser(user?.providerData[0]));
-      navigate('/')
-    }
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-  }
-
-  const handleLoginInfo = async (res)=>{
-      const data = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${res}`);
-      const json = await (data.json());
-      setUserInfo(json);
-      localStorage.setItem('userInfo',JSON.stringify(json));
-  }
-
-return (
-    <>
-      {
-        showAlert ?
-          <div class="flex items-center p-4 mb-4 text-sm text-blue-800 rounded-lg  dark:bg-gray-800 dark:text-blue-400 bg-red-400" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-            </svg>
-            <span class="sr-only">Info</span>
-            <div>
-              <span class="font-medium">Login Failed!</span> Change input credentials and try submitting again.
-            </div>
-          </div>
-          :
-          ""
       }
 
+  return (
+    <div>
       <section className='bg-blue-50 dark:bg-gray-900 flex flex-wrap'>
         <div className='flex flex-col items-center justify-center px-8 py-8 mx-auto md:h-screen lg:py-0'>
           <div className='w-full bg-blue-100 rounded-lg border border-gray-300 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
@@ -208,8 +144,8 @@ return (
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
-export default Login
+export default DocLogin;

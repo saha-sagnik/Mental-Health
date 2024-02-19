@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import google from '../assets/google.png'
-import logo from '../assets/mindharbor-logo-removebg-preview1.png'
+import google from '../../assets/google.png'
+import logo from '../../assets/mindharbor-logo-removebg-preview1.png'
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { auth } from '../constants/firebase';
-
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
 
@@ -189,7 +186,7 @@ const SignUp = () => {
                 placeholder="yourmail@mail.com" required />
               </div>
               <div>
-                <label for="phno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <label for="phno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Number</label>
                 <input
                 onChange={(e)=>{
                   setPhno(e.target.value);
