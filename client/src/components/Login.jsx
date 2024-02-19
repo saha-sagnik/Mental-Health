@@ -53,7 +53,7 @@ const Login = () => {
       password:pass
     });
     if(response.data?.loggedin){
-      dispatch(addUser(response?.data?.user))
+      dispatch(addUser(response?.data?.user));
       navigate('/');
     }
     else if(!response.data?.exists){
