@@ -22,7 +22,7 @@ app.use(cors());
 
 connectDB();
 
-const routes = require('./routes/index');
+const routes = require('./routes/routes');
 app.use('/', routes);
 
 

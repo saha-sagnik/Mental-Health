@@ -29,7 +29,7 @@ const SignUp = () => {
     setFname(json?.given_name);
     setLname(json?.family_name);
     setMail(json?.email);
-    console.log("added user",json);
+    console.log("Added User",json);
   }
 
   const handleNext = ()=>{
@@ -39,31 +39,36 @@ const SignUp = () => {
         return ;
       }
       else
-        alert('password too small');
+        alert('Password too small');
     }
     else{
-      alert("fill all the details");
+      alert('Please Fill all the Details');
     }
   }
 
   const handleSignup =async ()=>{
-    const response = await axios.post("http://localhost:3000/signup",{
-      Firstname:fname,
-      Lastname:lname,
-      mail:mail,
-      password:password,
-      age:age,
-      phno:phno
-    })
-    if(response?.data?.signedup){
-      navigate('/login');
-    }
-    else if(response?.data?.exists){
-      alert('Email already exists');
-    }
-    else {
-      alert('We are facing issues at server side try again later');
-    }
+    const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+    try {
+      const response = await axios.post(`${baseURL}/signup`, {
+          firstName: fname,
+          lastName: lname,
+          mail,
+          password,
+          age,
+          phno
+      });
+
+      if (response?.data?.signedup) {
+          navigate('/login');
+      } else if (response?.data?.exists) {
+          alert('Email already exists');
+      } else {
+          alert('Server Side Error! Please Try Again');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+  }
   //   createUserWithEmailAndPassword(auth, mail, password)
   // .then((userCredential) => {
   //   // Signed up 

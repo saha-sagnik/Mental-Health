@@ -1,6 +1,6 @@
 {
-    "name": "Arjun",
-    "gender":"male"
+    "name": "TestDoctor",
+    "gender":"Male"
     "specialisation": "Eating Disorder",
     "contact":"5634985678",
     "availability":"available"

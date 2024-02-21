@@ -8,10 +8,20 @@ const userSchema = new Schema({
     },
     email:{
         type: String,
-        unique: true
+        unique: true,
+        trim: true,
+    },
+    password:{
+        type: String,
+        unique: true,
+        trim: true,
     },
     photo:{
         type: String
+    },
+    phoneNumber: {
+        type: String,
+        trim: true
     },
     gender:{
         type: String,

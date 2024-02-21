@@ -14,106 +14,97 @@ import { auth } from '../constants/firebase';
 
 // Login.jsx
 const Login = () => {
-
   const provider = new GoogleAuthProvider();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const status = useSelector(Store=>Store.info.loggedIn);
-  useEffect(()=>{
-    const subscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          dispatch(addUser(user?.providerData[0]));
-          // ...
-          navigate('/')
-        } else {
-          // User is signed out
-          navigate('/login');
-        }
-      });
-
-      return()=> subscribe();
-},[]);
 
   const [mail, setMail] = useState('');
   const [pass, setPass] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleUser =async (access_token)=>{
-    const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
-    const json = await data.json();
-    dispatch(addUser(json));
-    console.log("added user",json);
-  }
-
   const submit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:3000/login',{
-      mail:mail,
-      password:pass
-    });
-    if(response.data?.loggedin){
-      dispatch(addUser(response?.data?.user));
-      navigate('/');
-    }
-    else if(!response.data?.exists){
-      navigate('/signup');
-    }
-    else{
-      alert('Try again later');
+    try {
+      const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+      const response = await axios.post(`${baseURL}/login`, {
+        email: mail,
+        password: pass
+      });
+  
+      if (response.data?.exists) {
+        dispatch(addUser(response?.data?.user));
+        navigate('/');
+      } else{
+        navigate('/signup');
+      }
+    } catch (error) {
+      console.error('Error submitting login:', error);
+      alert('An error occurred while submitting login. Please try again later.');
     }
   };
 
-  const login = useGoogleLogin({
-    onSuccess: (codeResponse) => {
-      handleUser(codeResponse.access_token)
-    },
-    onError: (error) => {
-      console.log('Google login failed:', error);
-    },
-  });
+  // GOOGLE LOGIN PREVIOUS
+  // const handleUser =async (access_token)=>{
+  //   const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
+  //   const json = await data.json();
+  //   dispatch(addUser(json));
+  //   console.log("added user",json);
+  // }
+  // const login = useGoogleLogin({
+  //   onSuccess: (codeResponse) => {
+  //     handleUser(codeResponse.access_token)
+  //   },
+  //   onError: (error) => {
+  //     console.log('Google login failed:', error);
+  //   },
+  // });
+  // const handleLoginInfo = async (res)=>{
+  //     const data = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${res}`);
+  //     const json = await (data.json());
+  //     setUserInfo(json);
+  //     localStorage.setItem('userInfo',JSON.stringify(json));
+  // }
 
-  const sendLogInfo =async (data)=>{
-      const res = await axios.post('http://localhost:3000/post-login',{
-        data
-      });
-      console.log(res?.data);
-  }
-
-  const firebaseLogin = ()=>{
-    signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log("user",user,"token",token);
-    sendLogInfo(user?.providerData[0]);
-    if(user){
-      dispatch(addUser(user?.providerData[0]));
-      navigate('/')
+  const sendLogInfo = async (data) => {
+    try {
+      const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+      const response = await axios.post(`${baseURL}/post-login`, { data });
+      console.log("Inside sendLogInfo",response);
+      return response;
+    } catch (error) {
+      console.error('Error sending Login Info:', error);
+      alert('An error occurred while sending login info. Please try again later.');
     }
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-  }
+  };
 
-  const handleLoginInfo = async (res)=>{
-      const data = await fetch(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${res}`);
-      const json = await (data.json());
-      setUserInfo(json);
-      localStorage.setItem('userInfo',JSON.stringify(json));
-  }
+  const firebaseLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      let serverResponse = await sendLogInfo(user?.providerData[0].email);
+      if (serverResponse.exists) {
+        dispatch(addUser(user?.providerData[0]));
+        navigate('/');
+      }else{
+        navigate('/signup');
+      }
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    } catch (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error("ERROR OCCURRED:",errorMessage,"ERROR CODE:",errorCode);
+      console.info("The email and AuthCredential Type of user",email,credential);
+    }
+  };
+  
 
 return (
     <>
@@ -139,7 +130,7 @@ return (
               <div className='flex justify-center items-center'>
                 <img className='h-10 m-3' src={logo} alt="" />
                 <Link path='/' className='flex items-center text-2xl font-semibold text-gray-900 dark:text-white '>
-                  Mindharbor
+                  MindHarbor
                 </Link>
               </div>
               <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white '>
@@ -149,7 +140,7 @@ return (
               <form className='space-y-4 md:space-y-6' action="">
                 <div className='flex gap-4 flex-col-1'>
                   <div>
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                     <input type="email" name="email" id="email"
                       class="bg-gray-50  pr-10 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="yourmail@mail.com"
