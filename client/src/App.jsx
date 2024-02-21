@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Outlet, RouterProvider, createBrowserRouter, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Login from './components/Login';
+import Login from './components/LoginSignup/Login';
 import Help from "./components/Help";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/LoginSignup/SignUp";
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import WhyChooseUs from "./components/WhyChooseUs";
@@ -23,6 +23,7 @@ import Consult from "./components/Consult";
 import User from "./components/User";
 import PdfDownload from "./components/pdftest/PdfDownload";
 import FurtherQuestions from "./components/FurtherQuestions";
+import UploadPdf from "./components/pdftest/UploadPdf";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -99,6 +100,10 @@ element: <User/>
   {
     path:'/pdf',
     element:<PdfDownload />
+  },
+  {
+    path:'test',
+    element:<UploadPdf />
   }
 ])
 
