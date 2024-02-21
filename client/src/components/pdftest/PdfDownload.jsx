@@ -1,7 +1,7 @@
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PDF from "./PDF";
 import { useEffect, useState } from "react";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes,getDownloadURL } from "firebase/storage";
 import { storage } from "../../constants/firebase";
 
 function PdfDownload() {
@@ -19,8 +19,10 @@ function PdfDownload() {
     if (pdfBlob) {
       console.log(pdfBlob);
       const pdfRef = ref(storage, `${getCurrentDate()}.pdf`);
-      uploadBytes(pdfRef, pdfBlob).then(() => {
-        console.log('done');
+      uploadBytes(pdfRef, pdfBlob).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          console.log(url);
+        });
       });
     }
   };
