@@ -1,31 +1,16 @@
-/*
-Progress - 
-    PreviousScore = SELECT SCORE FROM USER WHERE UID = <userid>;
-    CurrScore = sum(score_array)
-    Progress = CurrScore - PreviousScore
-    UPDATE USER SET SCORE = CurrScore WHERE UID = <userid>;
+const express = require('express');
+const router = express.Router();
+const mainController = require("../controllers/mainController");
+const cors = require("cors");
 
-Assigning Diagnosis
-    questionare score - 0-5
-    if min_score 0 max_score 50 
-    00-10 1
-    11-20 2
-    21-30 3
-    31-40 4
-    41-50 5
+router.get('/',cors(),mainController.home);
 
-    if cat > 3 - direct assign to specialized doc
-    else:
-        check type
-        if type == couples - couples therapy
-        else - therapy options according to cat
+router.get("/checkUser",cors(),mainController.checkUser); // Present in Navbar checks at each route 
+router.post("/login",cors(),mainController.login); // Normal Login
+router.post("/post-login",cors(),mainController.postLogin); // Login with Firebase
+router.post("/signup",cors(),mainController.signup);
+router.get("/logout",cors(),mainController.logout);
+router.post('/info',cors(),mainController.questionnaireInfo);
 
 
-*/
-
-/*
-Assigning Date
-    occupied_day_list = select distint(day) from treatment where DID = <did>;
-    display all the days NOT in occupied_day_list
-    
-*/
+module.exports = router;

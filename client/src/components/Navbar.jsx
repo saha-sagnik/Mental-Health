@@ -5,7 +5,7 @@ import navitems from "../constants/navitems.json";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../store/InfoSlice';
 import { auth } from '../constants/firebase';
-import GoogleAuth from './GoogleAuth'; // Import the GoogleAuth component
+import Buttons from './Buttons';
 import axios from 'axios';
 
 
@@ -14,37 +14,21 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector(store => store.info.user);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        // If the user is authenticated with Firebase, check if the user exists in MongoDB
-        const postEmail = user?.email;
-        console.log("User:",user,"postEmail",postEmail);
-      } else {
-        // User is signed out
-        console.log('User is signed out');
-        navigate('/login');
-      }
-    });
-
-    return () => unsubscribe();
-  }, [dispatch, navigate]);
-
-  const handlenormalauth =async ()=>{
+  const handlenormalauth = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/checkUser`);
-
-      if (response.data.exists) {
-        // If the user exists in MongoDB, dispatch user details to Redux store
-        console.log("User exists");
+      const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+      const response = await axios.get(`${baseURL}/checkUser`);
+  
+      if (response.data.isloggedIn) {
+        console.log("User Logged In/ Signed Up");
         dispatch(addUser(user?.providerData[0]));
       } else {
-        // If the user does not exist in MongoDB, redirect to "/signup"
-        console.log("User does not exist");
-        navigate('/signup');
+        console.log("User has not Logged In/ Signed Up");
+        navigate('/');
       }
     } catch (error) {
       console.error('Error checking user:', error);
+      alert('An error occurred while checking user. Please try again later.');
     }
   }
 
@@ -55,6 +39,11 @@ const Navbar = () => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+      const response = await axios.get(`${baseURL}/logout`);
+      if(!response.logout){ 
+        console.error("Logout from server unsuccessful!");
+    }
       dispatch(removeUser());
       navigate('/login');
     } catch (error) {
