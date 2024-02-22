@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { QuizData } from '../constants/data';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../store/InfoSlice';
+import { useNavigate } from 'react-router-dom';
 
 const FurtherQuestions = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [ans, setAns] = useState(null); // State for storing user input
     const data = QuizData.commoncard;
     const [index,setIndex] = useState(0);
-
+    const [showResult,setShowResult] = useState(false);
     const handleNext = ()=>{
       if(ans==null){
         alert("Choose an option");
@@ -22,11 +24,24 @@ const FurtherQuestions = () => {
     }
 
     const handleSubmit = ()=>{
-
+      setShowResult(true);
+      setTimeout(() => {
+        navigate('/show');
+      }, 1500);
     }
 
     return (
         <div>
+          {
+            showResult && 
+              <>
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                    <span class="font-medium">Success alert!</span> Your Responses have been saved.
+                    {navigateToShow()}
+                </div>
+              </>
+        }
+
                   <h1>{data[index].Question}</h1>
                     {data[index].Type === "Yes/No" ? (
                         <div className="container">
@@ -50,7 +65,8 @@ const FurtherQuestions = () => {
                     )}
                 <div>
                   <button className='bg-blue-300 m-1 px-2 rounded-md'
-                  onClick={()=>{
+                  onClick={(e)=>{
+                    e.preventDefault();
                     const res = handleNext();
                     if(index==data.length-1){
                       const res = confirm("submit details");
@@ -65,6 +81,7 @@ const FurtherQuestions = () => {
                     Next
                   </button>
                 </div>
+            
             </div>
     );
 };
