@@ -3,7 +3,7 @@ import doctorItems from '../constants/doctoritems.json';
 import docList from '../constants/doctor.json'
 import { Link } from 'react-router-dom';
 
-const api = "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/";
+//const api = "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/"; 
 
 const OurDoctors = () => {
   const [doc, setDoc] = useState(0);
@@ -50,7 +50,7 @@ const OurDoctors = () => {
         </div>
 
         <div className="lg:mt-0 lg:col-span-4 lg:flex bg-blue-600 mr-[5vw] w-[22vw] h-[26vw] rounded-lg absolute top-[9%] right-8 z-20">
-          <img src={api + docList[doc].img} alt="mockup" />
+          <img src={docList[doc].img} alt="mockup" />
         </div>
 
         <div className="lg:mt-0 lg:col-span-4 lg:flex bg-[#a6b2ce] mr-[5vw] w-[22vw] h-[26vw] rounded-lg absolute top-[11%] right-[2%] z-10"></div>
