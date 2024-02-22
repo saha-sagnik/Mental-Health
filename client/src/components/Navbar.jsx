@@ -7,12 +7,13 @@ import { addUser, removeUser } from '../store/InfoSlice';
 import { auth } from '../constants/firebase';
 import Buttons from './Buttons';
 import axios from 'axios';
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(store => store.info.user);
+  const auth = getAuth();
 
   const handlenormalauth = async () => {
     try {
@@ -33,7 +34,18 @@ const Navbar = () => {
   }
 
   useEffect(()=>{
-    handlenormalauth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const uid = user.uid;
+        // ...
+      } else {
+        handlenormalauth();
+        // User is signed out
+        // ...
+      }
+    });
   },[]);
 
   const handleSignOut = async () => {
