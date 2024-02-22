@@ -2,23 +2,32 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    userID: {
-        type: String,
-        required: true,
-        unique:true
-    },
     name:{
         type:String,
+        trim: true,
+    },
+    email:{
+        type: String,
+        unique: true,
+        trim: true,
+    },
+    password:{
+        type: String,
+        unique: true,
         trim: true,
     },
     photo:{
         type: String
     },
+    phoneNumber: {
+        type: String,
+        trim: true
+    },
     gender:{
         type: String,
         enum: ["M","F","T","N"] //male,female,trans,prefer not to say
     },
-    ageGroup:{
+    age:{
         type: String,
     },
     diagnosis: {

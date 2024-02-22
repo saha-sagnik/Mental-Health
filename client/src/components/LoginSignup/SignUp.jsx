@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import google from '../assets/google.png'
-import logo from '../assets/mindharbor-logo-removebg-preview1.png'
+import google from '../../assets/google.png'
+import logo from '../../assets/mindharbor-logo-removebg-preview1.png'
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { auth } from '../constants/firebase';
-
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
 
@@ -29,7 +26,7 @@ const SignUp = () => {
     setFname(json?.given_name);
     setLname(json?.family_name);
     setMail(json?.email);
-    console.log("added user",json);
+    console.log("Added User",json);
   }
 
   const handleNext = ()=>{
@@ -39,34 +36,49 @@ const SignUp = () => {
         return ;
       }
       else
-        alert('password too small');
+        alert('Password too small');
     }
     else{
-      alert("fill all the details");
+      alert('Please Fill all the Details');
     }
   }
 
-  const handleSignup = ()=>{
-    // const response = await axios.post("http://localhost:5001/signup",{
-    //   test:1,
-    //   Firstname:fname,
-    //   Lastname:lname,
-    //   mail:mail,
-    //   password:password
-    // })
-    createUserWithEmailAndPassword(auth, mail, password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    alert("Email already Registered");
-    navigate('/login');
-    // ..
-  });
+  const handleSignup =async ()=>{
+    const baseURL = process.env.NODE_ENV === 'production' ? `${process.env.PRODUCTION_URL}` : 'http://localhost:3000';
+    try {
+      const response = await axios.post(`${baseURL}/signup`, {
+          firstName: fname,
+          lastName: lname,
+          mail,
+          password,
+          age,
+          phno
+      });
+
+      if (response?.data?.signedup) {
+          navigate('/login');
+      } else if (response?.data?.exists) {
+          alert('Email already exists');
+      } else {
+          alert('Server Side Error! Please Try Again');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+  }
+  //   createUserWithEmailAndPassword(auth, mail, password)
+  // .then((userCredential) => {
+  //   // Signed up 
+  //   const user = userCredential.user;
+  //   // ...
+  // })
+  // .catch((error) => {
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   alert("Email already Registered");
+  //   navigate('/login');
+  //   // ..
+  // });
 
   }
 
@@ -104,8 +116,8 @@ const SignUp = () => {
                   setFname(e.target.value);
                 }}
                 type="text" name="text" id="name" 
-                class="bg-gray-50  pr-10 border border-gray-3 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="first name" required="" />
+                class="bg-gray-50 pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                placeholder="Jane" required="" />
               </div>
               <div>
                 <label for="name" class="block mb-2 text-sm font-medium  dark:text-white">Last Name</label>
@@ -115,7 +127,7 @@ const SignUp = () => {
                 }}
                 type="name" name="name" 
                 id="name" class="bg-gray-50  pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                placeholder="last name" required="" />
+                placeholder="Doe" required="" />
               </div>
               
               <div>
@@ -126,7 +138,7 @@ const SignUp = () => {
                 }}
                 type="email" name="email" id="email" 
                 class="bg-gray-50  pr-10 border border-gray-300 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="yourmail@mail.com" required="" />
+                placeholder="username@mail.com" required="" />
               </div>
               <div>
                 <label for="password" class="block mb-2 text-sm font-medium dark:text-white">Password</label>
@@ -179,7 +191,7 @@ const SignUp = () => {
                 placeholder="yourmail@mail.com" required />
               </div>
               <div>
-                <label for="phno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                <label for="phno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Number</label>
                 <input
                 onChange={(e)=>{
                   setPhno(e.target.value);
