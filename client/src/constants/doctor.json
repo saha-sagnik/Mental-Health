@@ -2,31 +2,37 @@
     {
         "img": "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/6179baca9468ac59294f2168_bisma-anwar.jpg",
         "position": "Licensed Psychologist",
-        "name": "Arjun",
-        "specialised": "Eating Disorder"
+        "name": "Shafaq Sultana",
+        "specialized": "Eating Disorder"
     },
     {
         "img": "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/6179baaad16f35677ec9fe40_janelle-corrie.jpg",
         "position": "Clinical Social Worker",
         "name": "Janelle Corrie",
-        "specialised": "Depression"
+        "specialized": "Depression"
     },
     {
         "img": "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/6179b8d0295c9bc514757f0a_jill-daino.jpg",
         "position": "Counseling Psychologist",
         "name": "Jill Daino",
-        "specialised": "Anxiety Disorders"
+        "specialized": "Anxiety Disorders"
     },
     {
         "img": "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/6179b8c04165e5dcd6c12952_neal-bauer.jpg",
         "position": "Psychiatrist",
         "name": "Neal Bauer",
-        "specialised": "Bipolar Disorder"
+        "specialized": "Bipolar Disorder"
     },
     {
         "img": "https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/6179b8a979806d695372125c_georgiana-avram.jpg",
         "position": "Licensed Marriage and Family Therapist",
         "name": "Georgiana Avram",
-        "specialised": "Substance Use Disorders"
+        "specialized": "Divorce Counselling"
+    },
+    {
+        "img": "https://7xm.xyz/shutterstock/images/7xm.xyz134668.jpg",
+        "position": "Psychiatrist",
+        "name": "Dr. Alex Chen",
+        "specialized": "Mood Disorders"
     }
 ]
