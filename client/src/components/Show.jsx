@@ -29,7 +29,7 @@ const Show = () => {
             { info && 
             <>
             <h1 className="text-4xl flex justify-center p-4 font-semibold font-sans" >Your Responses🤲</h1>
-                <div>
+                <div className="grid grid-flow-row">
                 {info?.map((x) => {
                     return (
                         <div className="grid grid-cols-2 gap-4 p-4">
