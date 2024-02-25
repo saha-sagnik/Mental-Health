@@ -9,8 +9,8 @@ exports.home = asyncHandler((req,res)=>{
 
 exports.signup = asyncHandler(async (req, res) => {
   const { firstName, lastName, email, password, age, phno } = req.body;
-
-  if (firstName=="" || !lastName=="" || email=="" || password=="" || !age || !phno) {
+  console.log(req.body);
+  if (firstName=="" || lastName=="" || email=="" || password=="" || !age || !phno) {
       throw new ApiError(400, "All fields are required");
   }
 
@@ -89,7 +89,7 @@ exports.postLogin = asyncHandler(async(req,res)=>{
   else{
     console.log("User is present in DB");
     req.session.email = email;
-    return res.json({exists: true});
+    return res.json({exists: true,user});
   }
 
 });
