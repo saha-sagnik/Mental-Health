@@ -111,8 +111,9 @@ exports.questionnaireInfo = asyncHandler(async (req,res)=>{
       message=message+`Question${i+1}: `+req.body.info[i].ques+`Its Answer: `+req.body.info[i].data;
     }
     console.log("This is the message that should be given as prompt:",message);
-    message+=`.From this questionnaire understand and diagnose from these disorders: Anxiety Disorders,Depression,PTSD,OCD,Bipolar Disorder,Schizophrenia,Eating Disorders,Substance Use Disorders,ADHD which disorder
-    is the user likely to have? Give the response as a JSON object such that it has disorder name, index number and the complete assessment considering the options I gave above as an array.`
+    message+=`.From this questionnaire understand and diagnose from these disorders: Anxiety Disorders,Depression,PTSD,OCD,Bipolar Disorder,Schizophrenia,Eating Disorders,Substance Use Disorders,ADHD or any other mental disorder and which disorder
+    is the user likely to have? Give the response as a JSON object such that it has disorder name, index number and the complete assessment considering the options I gave above as an array. 
+    The assessment you provide should be detailed and generate the data as a format of a report.`
     
     let GeminiResponse = await gpt(message);
     console.log("Gemini gives this response: ",GeminiResponse, typeof(GeminiResponse));
