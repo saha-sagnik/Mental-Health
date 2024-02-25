@@ -42,7 +42,7 @@ function PdfDownload() {
 
   const getdownload =async ()=>{
     console.log("clicked")
-    getDownloadURL(ref(storage, 'myfirstpdf.pdf'))
+    getDownloadURL(ref(storage, '.pdf'))
   .then((url) => {
     // `url` is the download URL for 'images/stars.jpg'
 
@@ -78,7 +78,7 @@ function PdfDownload() {
 
   return (
     <div className="w-full h-full flex justify-center">
-      <PDFDownloadLink document={<PDF />} fileName="myfirstpdf.pdf">
+      <PDFDownloadLink document={<PDF />} fileName={getCurrentDate()}>
         {({ loading, url, error, blob }) =>
           loading ? (
             <button>Loading Document ...</button>

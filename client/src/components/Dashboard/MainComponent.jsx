@@ -3,9 +3,13 @@ import 'flowbite';
 import { Link } from 'react-router-dom';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDF from '../pdftest/PDF';
+import { useSelector } from 'react-redux';
 
 
 function MainComponent() {
+
+  const user= useSelector(store=>store.info.user);
+
   const handleDownload = ()=>{
     <PDFDownloadLink document={<PDF />} fileName="myfirstpdf.pdf">
         <button>button</button>
@@ -111,11 +115,11 @@ function MainComponent() {
               <div class="bg-white w-1/3 mt-10 rounded-lg">
                 <div class="flex items-center justify-center pt-2 flex-col">
                   <img src="https://media.licdn.com/dms/image/C5603AQGfbQyx4sF20w/profile-displayphoto-shrink_800_800/0/1658989244784?e=1714003200&v=beta&t=jYTdCrLmwOezHTt5sg7PjHoRv4sDeBHNFoKg6QybKGA" class="rounded-full w-32" />
-                  <h1 class="text-gray-800 font-semibold text-xl mt-5">Sagnik Saha</h1>
+                  <h1 class="text-gray-800 font-semibold text-xl mt-5">{user?.displayName}</h1>
                   <h1 class="text-gray-500 text-sm">Mysuru, India</h1>
                   <div>
                     <div class="text-gray-500 text-sm p-4 text-center flex">
-                      Email address: sagnik12347@gmail.com
+                      Email address: {user?.email}
                     </div>
                   </div>
                   <div>

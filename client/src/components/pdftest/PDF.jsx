@@ -48,38 +48,28 @@ import {
       <Document>
         <Page style={styles.page} size={"A4"}>
                 <View style={{display:"flex"}}>
-                <Text style={{textAlign: "center",fontSize:14}} >PSYCHIATRIC OUTPATIENT CLINIC</Text>
-                <Text style={{textAlign: "center",fontSize:14}}>123 Main Street</Text>
-                <Text style={{textAlign: "center",fontSize:14}}>Anywhere, US 12345-6789</Text>
+                <Text style={{textAlign: "center",fontSize:14}} >CLINIC</Text>
                 </View>
             <View style={{marginTop:20}}>
                 <Text style={styles.title}>Complete Evaluation: Gemini</Text>
             </View>
             <View style={{marginTop:13}}>
                 <Text>
-                    Date of Exam: 6/8/2016
+                    Date of Exam: 25/02/2024
                 </Text>
                 <Text>
-                    Time of Exam: 5:22:37 PM
+                    Time of Exam: 3:20 PM
                 </Text>
             </View>
             <View style={{marginTop:13}}>
-                <Text>Patient Name: Little, Aimee</Text>
-                <Text>Patient Number: 1000010659748</Text>
+                <Text>Patient Name: Sagnik Saha</Text>
+                <Text>Patient Number: 1230002</Text>
             </View>
           <View style={styles.section}>
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >History: </Text>
             <Text>
-                Mrs. Little is a widowed Canadian 38 year old woman. Her chief complaint is, "I am completely miserable since
-                my dear husband died."
-                The following information was provided by:
-                Mrs. Little
-                Mrs. Little's family.
-                Mrs. Little describes symptoms of a depressive disorder. She reports that there is a precipitant for her depression. Mrs.
-                Little's current depressive symptoms are attributed to the death of an important person in her life, details are as follows:
-                "My husband died of cancer three months ago." Depressive symptoms began insidiously over a period of months. She
-                describes episodes of chronic or daily depression
+            Sagnik has a history of mental health concerns, including Adjustment Disorder with Depressed Mood and Generalized Anxiety Disorder.
             </Text>
           </View>
 
@@ -87,19 +77,7 @@ import {
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Current Symptoms: </Text>
             <Text>
-                She reports that her appetite is decreased. Some weight loss has occurred. She reports a weight
-                loss of more than five pounds. She reports the weight change as occurring over the following timeframe: One Month.
-                Concentration difficulty associated with her depressive symptoms have been reported. Mrs. Little reports that her mind
-                often wanders. She reports "Crying Spells" or episodes. Feelings of sadness have been reported. She reports difficulty
-                sleeping. Insomnia is reported.
-                Suicidality: She denies suicidal ideas or intentions. Denial is convincing.
-                Prior Depressive /Manic Episodes: She reports that there have been no prior depressive episodes. Mrs. Little does
-                not have a history of manic or hypomanic episodes.
-                Severity/ Complexity: Based on the risk of morbidity without treatment and her description of interference with
-                functioning, severity is estimated to be moderate.
-                Mrs. Little has symptoms of anxiety. Anxiety symptoms have been present for months. Anxiety symptoms are occurring
-                daily. She reports occurrences of difficulty concentrating. Feelings of restlessness are described. Difficulty sleeping is
-                occurring. There is difficulty falling asleep. She describes an exaggerated startle response. 
+            Sagnik is experiencing symptoms of depression, such as persistent sadness, loss of interest or pleasure in activities, feelings of worthlessness or guilt, and difficulty concentrating. Additionally, he exhibits symptoms of anxiety, including excessive worry, restlessness, muscle tension, and irritability. 
             </Text>
           </View>
 
@@ -107,15 +85,14 @@ import {
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Past Psychiatric History:</Text>
             <Text>
-                There is no history of Mrs. Little ever having experienced withdrawal from any substance. 
-            </Text>
+            Sagnik has a history of mental health issues, including previous episodes of depression and anxiety.            </Text>
           </View>
 
           <View style={styles.section}>
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Suicidal/Self Injurious:</Text>
             <Text>
-                Mrs. Little has no history of suicidal or self injurious behavior.  
+            There is no current indication of suicidal or self-injurious behavior; however, Sagnik reports occasional thoughts of hopelessness and despair. 
             </Text>
           </View>
 
@@ -123,7 +100,7 @@ import {
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Addiction/Use History: </Text>
             <Text>
-                Mrs. Little denies any history of substance abuse.   
+            There is no reported history of substance abuse or addiction.
             </Text>
           </View>
 
@@ -131,12 +108,11 @@ import {
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Psychotropic Medication History: </Text>
             <Text>
-                Psychotropic medications have never been prescribed for Mrs. Little.    
+            Sagnik has previously been prescribed psychotropic medications for depression and anxiety, including selective serotonin reuptake inhibitors (SSRIs) and benzodiazepines.
             </Text>
           </View>
 
-          <View style={styles.section}>
-            {/* <Image src={nextLogo} /> */}
+          {/* <View style={styles.section}>
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Social/Developmental History: </Text>
 
             <Text>Mrs. Little is a widowed 38 year old woman. She is Canadian. She is a Christian.</Text>
@@ -153,24 +129,20 @@ import {
             <Text>Client's Goals:</Text>
             <Text>“I just want to feel better.”   </Text>
 
-          </View>
+          </View> */}
 
           <View style={styles.section}>
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Family History: </Text>
             <Text>Father known to have anxiety.</Text>
-            <Text>Sister thought to have depression.</Text>
-            <Text>Daughter treated as outpatient for a learning disorder.</Text>
-            <Text>Family psychiatric history is otherwise negative. There is no other history of psychiatric disorders, psychiatric treatment
-            or hospitalization, suicidal behaviors or substance abuse in closely related family members.</Text>
           </View>
 
           <View style={styles.section}>
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Diagnoses: </Text>
             <Text>
-            Adjustment disorder with depressed mood, F43.21 (ICD-10) (Active)</Text>
-            <Text>Generalized anxiety disorder, F41.1 (ICD-10) (Active) 
+            Adjustment disorder with depressed mood</Text>
+            <Text>Generalized anxiety disorder
             </Text>
           </View>
 
@@ -178,8 +150,7 @@ import {
             {/* <Image src={nextLogo} /> */}
             <Text style={{fontSize:16,fontWeight:"demibold"}} >Instructions / Recommendations: </Text>
             <Text>
-            A clinic or outpatient treatment setting is recommended because patient is impaired to the degree that there is
-            relatively mild interference with interpersonal /occupational functioning.     
+            It is recommended that Sagnik receive treatment in a clinic or outpatient setting. This setting allows for regular monitoring and support while allowing him to maintain his daily activities. Psychotherapy, such as cognitive-behavioral therapy (CBT) or interpersonal therapy (IPT), may be beneficial in addressing his symptoms. Additionally, medication management by a psychiatrist can help alleviate symptoms of depression and anxiety. Sagnik should also be encouraged to engage in self-care practices, such as regular exercise, healthy eating, and relaxation techniques, to support his mental well-being. Follow-up appointments should be scheduled to monitor his progress and adjust treatment as needed.    
             </Text>
           </View>
   
