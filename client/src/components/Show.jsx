@@ -19,6 +19,7 @@ const Show = () => {
         const response = await axios.post('http://localhost:3000/info',{
             info
         })
+        console.log(response.data);
     }
 
 
