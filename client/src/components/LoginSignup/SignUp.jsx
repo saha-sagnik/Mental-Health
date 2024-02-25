@@ -13,10 +13,12 @@ const SignUp = () => {
   const [fname,setFname] = useState(null);
   const [lname,setLname] = useState(null)
   const [mail,setMail] = useState(null);
-  const [password,setPassword] = useState();
+  const [password,setPassword] = useState(1234567890);
   const [next,setNext] = useState(false);
   const [gender,setGender] = useState(null);
   const [age,setAge] = useState(null);
+
+  console.log("phno",phno);
 
   const handleUser =async (access_token)=>{
     const data =await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`);
@@ -141,12 +143,12 @@ const SignUp = () => {
                 placeholder="username@mail.com" required="" />
               </div>
               <div>
-                <label for="password" class="block mb-2 text-sm font-medium dark:text-white">Password</label>
+                <label class="block mb-2 text-sm font-medium dark:text-white">Password</label>
                 <input 
                 onChange={(e)=>{
                   setPassword(e.target.value);
                 }}
-                type="password" name="password" id="password" 
+                type="password"
                 placeholder="••••••••" 
                 class="bg-gray-50 border pr-10 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                 required="" />
@@ -155,17 +157,17 @@ const SignUp = () => {
             :
             <div className='grid gap-4 grid-cols-2 grid-rows-2'>
               <div>
-                <label for="name" class="block mb-2 text-sm font-medium dark:text-white">Age</label>
+                <label class="block mb-2 text-sm font-medium dark:text-white">Age</label>
                 <input 
                 onChange={(e)=>{
                   setAge(e.target.value);
                 }}
-                type="text" name="text" id="name" 
+                type="number"
                 class="bg-gray-50  pr-10 border border-gray-3 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                 placeholder="Enter Age" required="" />
               </div>
               <div>
-                <label for="name" class="block mb-2 text-sm font-medium  dark:text-white">Gender</label>
+                <label  class="block mb-2 text-sm font-medium  dark:text-white">Gender</label>
                 <select 
                 className={`rounded-md text-gray-600 ${gender? 'text-black' : "text-gray-600"  }`}
                 onChange={(e)=>{
@@ -191,8 +193,8 @@ const SignUp = () => {
                 placeholder="yourmail@mail.com" required />
               </div>
               <div>
-                <label for="phno" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Number</label>
-                <input
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Number</label>
+                <input value={phno}
                 onChange={(e)=>{
                   setPhno(e.target.value);
                 }}
